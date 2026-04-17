@@ -101,11 +101,19 @@ export async function redeemReward(
 
   const { data: profile } = await admin
     .from("profiles")
-    .select("points")
+    .select("points, tier")
     .eq("id", user.id)
     .single();
 
-  return { success: true, newTotal: profile?.points ?? 0 };
+  const newTotal = profile?.points ?? 0;
+  const newTier = calcTier(newTotal);
+
+  await admin
+    .from("profiles")
+    .update({ tier: newTier })
+    .eq("id", user.id);
+
+  return { success: true, newTotal };
 }
 
 export async function getPointsBalance(): Promise<PointsBalance | null> {
