@@ -42,7 +42,8 @@ export async function GET(
         "Content-Length": buffer.byteLength.toString(),
       },
     });
-  } catch {
+  } catch (error) {
+    console.error("[passport-pdf] renderToBuffer failed:", error);
     return new Response(
       JSON.stringify({ error: "PDF generation failed. Please try again." }),
       {
