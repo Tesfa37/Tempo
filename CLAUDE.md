@@ -1,76 +1,39 @@
-# Tempo — CICDC 2026 Demo Site
+# Tempo
 
-## Source of Truth Documents
-- `docs/Tempo_Pitch_Script.md` — pitch narrative, product names, financial figures
-- `docs/Tempo_Deck_Specification.md` — visual brand direction and design system
-- `docs/Tempo_QA_Curriculum.md` — competitive positioning and Q&A strategy
+Sustainable adaptive fashion brand. Desta & Yishak Consulting client.
 
-## Tech Stack
-- Next.js 15 (App Router, TypeScript strict mode)
-- Tailwind CSS 4 + shadcn/ui
-- Anthropic SDK for AI features (claude-sonnet-4-5 model)
-- Deploy target: Vercel
+## What we're building
+Next.js 15 App Router, TypeScript strict, Tailwind, shadcn/ui, Vercel.
+AI features: Fit Concierge (streaming) and Passport Narrator (non-streaming), both on claude-sonnet-4-5.
+DPP: ESPR-aligned digital product passports with QR codes.
+Accessibility: WCAG 2.1 AA is the floor, not the ceiling.
 
-## Design System
-- Primary background: #E8DFD2 (warm sand)
-- Secondary background: #FAFAF7 (off-white)
-- Primary text: #1A1A1A (deep charcoal)
-- Accent amber: #C29E5F (numbers, emphasis)
-- Accent sage: #7A8B75 (positive states, CTAs)
-- Accent terracotta: #C4725A (alerts — use sparingly)
-- Headlines: Playfair Display
-- Body: Inter
+## How to verify any change
+Before saying "done":
+1. `pnpm lint`
+2. `pnpm typecheck`
+3. `pnpm build`
+4. For components: open the page in preview, tab through every interactive element, confirm focus rings show.
+5. For data: confirm all 6 SKUs (TMP-001 through TMP-006) work where relevant.
 
-## Brand Voice Rules
+## Hard rules
+- No em dashes in any copy. Use ", " instead.
+- Every image has meaningful alt text describing action, not condition. Never "wheelchair user" as alt. Prefer "person seated at a cafe wearing the charcoal Seated-Cut Trouser."
+- Every interactive element is keyboard-reachable.
+- Every form control has a linked label.
+- Every dynamic update announces via aria-live where appropriate.
+- No color-alone information conveyance.
+- No auto-playing media.
+- No motion on elements when prefers-reduced-motion is set.
+- No "inspired by" or "overcoming" language in code comments, copy, or UI.
+- Advisors are "advisors and co-designers," never "inspiration."
+- Disabled people are referred to as disabled people (identity-first) unless a specific advisor has stated otherwise.
 
-### Identity-First Language
-- USE: "disabled customer," "wheelchair user," "post-stroke customer"
-- NEVER USE: "differently-abled," "special needs," "handicapable," "people suffering from"
+## Architecture references
+- Passport data: src/data/passports.ts
+- Product data: src/data/products.ts
+- AI routes: src/app/api/concierge and src/app/api/narrator
+- Components: src/components (ui, layout, product, passport)
 
-### Caregiver Language
-- Must be in FIRST or SECOND person
-- USE: "for your client," "you can help your patient"
-- NEVER: "for their caregiver," "for the caregiver" (third person is wrong)
-
-### Prohibited Framings
-- NEVER: "inspired by," "brave," "overcoming," "despite their condition"
-- NEVER: "everyone deserves" (charity framing)
-- NEVER: "it's the right thing to do"
-- USE: "designed with disabled advisors," "built for the adaptive customer"
-- USE: business framing — market opportunity, user need, product feature
-
-### Ablesaviorism Check
-- Never center the non-disabled founder's journey
-- Never use disability as a tragic backstory device
-- Always: disabled people are experts, advisors, co-designers — credited and compensated
-
-## Code Rules
-- No localStorage or sessionStorage anywhere
-- No authentication (marketing site)
-- No real payment processing — use "Notify me when available" pattern
-- No cookie banners or GDPR friction
-- No stock photos of disabled people
-- WCAG 2.1 AA is a hard requirement — if a feature can't ship accessible, it doesn't ship
-
-## Before Declaring Any Task Done
-```bash
-pnpm lint && pnpm typecheck && pnpm build
-```
-
-## AI Features
-- Model: claude-sonnet-4-5 (not claude-3-5-sonnet, not claude-opus)
-- Route: /api/fit-concierge (POST, streaming)
-- Route: /api/passport-narrator (POST, non-streaming)
-- API key via ANTHROPIC_API_KEY env var
-
-## Accessibility Requirements
-- All interactive elements keyboard-reachable via Tab
-- Focus rings visible (using --color-amber, 2px solid, 2px offset)
-- All images: meaningful alt text (never "image" or "photo")
-- Color contrast: minimum 4.5:1 for normal text, 3:1 for large text
-- Accessibility statement: /accessibility (first-class nav item, not footer link)
-
-## Comment Policy
-- Write zero comments by default
-- Only comment when the WHY is non-obvious: a hidden constraint, an adaptive-specific behavior
-- Never: "// This handles the X case" — name the variable better instead
+## Delegation pattern
+When a task has multiple parallel sub-tasks (build component + seed data + write test), spawn clone subagents via Task() rather than doing them sequentially. Each clone inherits this CLAUDE.md.

@@ -20,15 +20,6 @@ create table public.point_events (
   created_at timestamptz default now()
 );
 
--- Unique partial index: one scan_dpp award per user per SKU
-create unique index point_events_scan_dpp_unique
-  on public.point_events (user_id, (metadata->>'sku'))
-  where event_type = 'scan_dpp';
-
--- Indexes for common query patterns
-create index point_events_user_id_idx on public.point_events (user_id);
-create index redemptions_user_id_idx on public.redemptions (user_id);
-
 -- Redemptions
 create table public.redemptions (
   id uuid default gen_random_uuid() primary key,
@@ -38,6 +29,13 @@ create table public.redemptions (
   fulfilled boolean default false,
   created_at timestamptz default now()
 );
+
+-- Indexes
+create unique index point_events_scan_dpp_unique
+  on public.point_events (user_id, (metadata->>'sku'))
+  where event_type = 'scan_dpp';
+create index point_events_user_id_idx on public.point_events (user_id);
+create index redemptions_user_id_idx on public.redemptions (user_id);
 
 -- RLS
 alter table public.profiles enable row level security;
@@ -52,11 +50,6 @@ create policy "Users read own events"
   on public.point_events for select using (auth.uid() = user_id);
 create policy "Users read own redemptions"
   on public.redemptions for select using (auth.uid() = user_id);
-
--- INSERT policies intentionally omitted for point_events and redemptions.
--- All point mutations go through server actions using createServiceClient()
--- (SUPABASE_SERVICE_ROLE_KEY), which bypasses RLS entirely. This is safe
--- because the service role key never reaches the browser.
 
 -- Auto-create profile on signup
 create or replace function public.handle_new_user()
