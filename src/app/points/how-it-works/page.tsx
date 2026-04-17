@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "How TempoPoints Work — Tempo",
+  title: "How TempoPoints Work, Tempo",
 };
 
 const ACTIONS = [
@@ -9,6 +9,11 @@ const ACTIONS = [
     event: "Scan a Digital Product Passport",
     points: 100,
     why: "Verifying material origins reduces information asymmetry and pushes brands toward supply-chain transparency. Every scan signals market demand for this data.",
+  },
+  {
+    event: "Read a full product passport",
+    points: 50,
+    why: "Reading the full passport, not just scanning, deepens your understanding of a garment's environmental footprint and material provenance.",
   },
   {
     event: "Complete a Fit Concierge session",
@@ -39,6 +44,11 @@ const ACTIONS = [
     event: "Advocacy share",
     points: 150,
     why: "Each share expands the audience for adaptive fashion, building the commercial case that makes continued investment possible.",
+  },
+  {
+    event: "Quarterly advocacy action",
+    points: 300,
+    why: "Structured advocacy, such as submitting public comment, attending a community event, or completing a designated campaign, creates durable policy and market pressure.",
   },
 ];
 

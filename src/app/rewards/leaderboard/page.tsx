@@ -3,7 +3,7 @@ import { Trophy } from "lucide-react";
 import { createServiceClient } from "@/lib/supabase/server";
 
 export const metadata = {
-  title: "Community Leaderboard — TempoPoints",
+  title: "Community Leaderboard, TempoPoints",
 };
 
 export default async function LeaderboardPage() {
@@ -59,7 +59,7 @@ export default async function LeaderboardPage() {
                   {leader.display_name ?? "Anonymous"}
                 </span>
                 <span className="text-sm font-semibold text-[#C29E5F] tabular-nums">
-                  {leader.points.toLocaleString()} pts
+                  {(leader.points ?? 0).toLocaleString()} pts
                 </span>
               </li>
             ))}

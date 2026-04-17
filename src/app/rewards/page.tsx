@@ -51,7 +51,7 @@ export default function RewardsPage() {
     supabase.auth.getUser().then(({ data: { user } }) => {
       setAuthed(!!user);
       if (user) {
-        getPointsBalance().then(setBalance).catch(() => null);
+        getPointsBalance().then(setBalance).catch(() => setBalance(null));
       }
     }).catch(() => setAuthed(false));
   }, []);
@@ -71,7 +71,7 @@ export default function RewardsPage() {
   if (!balance) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <p className="text-[#5A5A5A] text-sm animate-pulse">Loading your rewards...</p>
+        <p className="text-[#5A5A5A] text-sm motion-safe:animate-pulse">Loading your rewards...</p>
       </div>
     );
   }
@@ -90,7 +90,7 @@ export default function RewardsPage() {
               Every point you earn maps to a sustainability or community action.
             </p>
           </div>
-          <div className="text-right shrink-0">
+          <div className="text-right shrink-0" aria-live="polite" aria-atomic="true">
             <p className="text-5xl font-bold text-[#C29E5F] tabular-nums leading-none">
               {balance.points.toLocaleString()}
             </p>
