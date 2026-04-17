@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { VoiceLayer } from "@/components/voice/VoiceLayer";
+import { GuestPointsTracker } from "@/components/points/GuestPointsTracker";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -47,6 +50,9 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <VoiceLayer />
+        <Toaster position="bottom-right" richColors={false} />
+        <GuestPointsTracker />
       </body>
     </html>
   );

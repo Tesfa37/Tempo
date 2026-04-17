@@ -3,9 +3,18 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { PointsBadge } from "@/components/points/PointsBadge";
+
+const SHOW_NEW_BADGE = Date.now() < 1750000000000;
 
 const navLinks = [
   { href: "/shop", label: "Shop" },
+  {
+    href: "/passport",
+    label: "Passport",
+    ariaLabel: "View Digital Product Passport gallery",
+    badge: SHOW_NEW_BADGE ? "NEW" : undefined,
+  },
   { href: "/about", label: "About" },
   { href: "/accessibility", label: "Accessibility" },
 ];
@@ -33,11 +42,18 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded px-1"
+                aria-label={link.ariaLabel}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded px-1"
               >
                 {link.label}
+                {link.badge && (
+                  <span className="text-xs bg-amber-100 text-amber-900 rounded-full px-2 py-0.5">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             ))}
+            <PointsBadge />
             <Link
               href="/shop"
               className="bg-[#7A8B75] text-[#FAFAF7] text-sm font-medium px-4 py-2 rounded hover:bg-[#6a7a65] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
@@ -69,10 +85,16 @@ export function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="block py-2 text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] transition-colors"
+                  aria-label={link.ariaLabel}
+                  className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] transition-colors"
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}
+                  {link.badge && (
+                    <span className="text-xs bg-amber-100 text-amber-900 rounded-full px-2 py-0.5">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}
