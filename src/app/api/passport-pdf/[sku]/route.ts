@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
-import { renderToBuffer } from "@react-pdf/renderer";
+import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import QRCode from "qrcode";
-import React from "react";
+import React, { type ReactElement } from "react";
 import { passports } from "@/data/passports";
 import { PassportPDFDocument } from "@/components/passport/PassportPDFDocument";
 
@@ -27,11 +27,14 @@ export async function GET(
       { width: 180, margin: 1 }
     );
 
-    const buffer = await renderToBuffer(
-      React.createElement(PassportPDFDocument, { passport, qrDataUri })
-    );
+    const element = React.createElement(
+      PassportPDFDocument,
+      { passport, qrDataUri }
+    ) as ReactElement<DocumentProps>;
 
-    return new Response(buffer, {
+    const buffer = await renderToBuffer(element);
+
+    return new Response(new Uint8Array(buffer), {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="tempo-passport-${sku}.pdf"`,
