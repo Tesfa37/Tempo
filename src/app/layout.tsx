@@ -4,6 +4,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VoiceLayer } from "@/components/voice/VoiceLayer";
 import { GuestPointsTracker } from "@/components/points/GuestPointsTracker";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { buildOrganization } from "@/lib/structured-data";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -47,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="bg-[#E8DFD2] text-[#1A1A1A] antialiased">
+        <StructuredData data={buildOrganization()} />
         <Header />
         <main>{children}</main>
         <Footer />
