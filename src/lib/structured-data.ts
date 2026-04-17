@@ -36,6 +36,8 @@ export function buildOrganization(): object {
   };
 }
 
+import type { Product } from "@/data/products";
+
 export function buildBreadcrumbList(
   items: { name: string; url: string }[]
 ): object {
@@ -49,29 +51,6 @@ export function buildBreadcrumbList(
       item: item.url,
     })),
   };
-}
-
-export interface Product {
-  id: string;
-  slug: string;
-  sku: string;
-  gtin: string;
-  name: string;
-  category: string;
-  price: number;
-  description: string;
-  longDescription: string;
-  adaptiveFeatures: { name: string; description: string; icon: string }[];
-  conditions: string[];
-  materials: string;
-  certifications: string[];
-  timeToDressMinutes: number;
-  sterilizationSafe: boolean;
-  sterilizationNotes: string;
-  variants: { size: string; inStock: boolean }[];
-  images: string[];
-  isFeatured: boolean;
-  isNew: boolean;
 }
 
 export function buildProductSchema(product: Product): object {
@@ -108,37 +87,37 @@ export function buildProductSchema(product: Product): object {
     },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "5",
-      reviewCount: "4",
-      bestRating: "5",
-      worstRating: "1",
+      ratingValue: 5,
+      reviewCount: 4,
+      bestRating: 5,
+      worstRating: 1,
     },
     review: [
       {
         "@type": "Review",
         author: { "@type": "Person", name: "Diane S." },
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
         reviewBody:
           "I've been putting on pants by myself for the first time in two years. The magnetic closure is genuinely invisible when dressed.",
       },
       {
         "@type": "Review",
         author: { "@type": "Person", name: "Renata M." },
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
         reviewBody:
           "The seated cut is the real innovation here. These fit as if they were measured for me.",
       },
       {
         "@type": "Review",
         author: { "@type": "Person", name: "Marcus, Home Care Aide" },
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
         reviewBody:
           "These reduce my morning dressing time by about 8 minutes per client. That's real.",
       },
       {
         "@type": "Review",
         author: { "@type": "Person", name: "Jennifer, Occupational Therapist" },
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
         reviewBody:
           "I recommend these to every post-stroke client I see now. The magnetic closure opens reliably with one hand.",
       },
