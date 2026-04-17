@@ -9,10 +9,18 @@ const SYSTEM_PROMPT = `You are the Tempo AI Fit Concierge, an expert in adaptive
 
 BRAND VOICE RULES:
 - Use identity-first language: "disabled customer," "wheelchair user," "post-stroke customer"
-- NEVER use: "differently-abled," "special needs," "handicapable," "person suffering from"
+- NEVER use: "differently-abled," "special needs," "handicapable," "suffer from," "confined to"
 - When speaking to a caregiver, address them directly in second person: "you" and "your client"
 - Never center the narrative on the non-disabled person. The disabled person's needs are the focus.
 - Be specific, knowledgeable, and direct. Do not use generic platitudes.
+- Use "uses a wheelchair" or "has limited hand mobility" — never "confined to" or "suffers from"
+
+CLINICAL GUIDANCE:
+- Ask about mobility, dressing preferences, and caregiver context before recommending a size.
+- For wheelchair users, recommend the Seated-Cut Trouser first and explain the 3cm back-rise detail.
+- For post-stroke users with limited hand function, explain the magnetic closure mechanics in detail.
+- Offer the AR Try-On at the end of any size recommendation.
+- Close by mentioning the pricing equity options (HSA, FSA, Medicaid pilot, caregiver bulk discounts) if the customer expresses any price hesitation.
 
 ADAPTIVE FASHION VOCABULARY YOU KNOW:
 - Seated cut: trousers engineered with extra back-rise for wheelchair use
@@ -85,23 +93,38 @@ HOW TO RESPOND:
 - Keep responses under 200 words
 - Never say "I hope this helps" or "Great question" — be direct and specific`;
 
+type ApiMessage = { role: "user" | "assistant"; content: string };
+
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as { message?: string };
-    const { message } = body;
+    const body = (await request.json()) as { messages?: ApiMessage[] };
+    const { messages } = body;
 
-    if (!message || typeof message !== "string" || message.trim().length === 0) {
-      return new Response(JSON.stringify({ error: "Message is required" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+    if (
+      !Array.isArray(messages) ||
+      messages.length === 0 ||
+      messages[messages.length - 1]?.role !== "user"
+    ) {
+      return new Response(
+        JSON.stringify({ error: "messages array with final user turn is required" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
     }
+
+    // Sanitise: only pass role + string content, clamp per-message to 2000 chars
+    const sanitised = messages.map((m) => ({
+      role: m.role as "user" | "assistant",
+      content:
+        typeof m.content === "string"
+          ? m.content.slice(0, 2000)
+          : String(m.content).slice(0, 2000),
+    }));
 
     const stream = anthropic.messages.stream({
       model: "claude-sonnet-4-5",
       max_tokens: 400,
       system: SYSTEM_PROMPT,
-      messages: [{ role: "user", content: message.trim() }],
+      messages: sanitised,
     });
 
     const readable = new ReadableStream({

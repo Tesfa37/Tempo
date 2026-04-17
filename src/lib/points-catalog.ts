@@ -10,6 +10,7 @@ export const POINTS_RULES = {
   advocacy_share: 150,
   quarterly_advocacy_action: 300,
   purchase_per_dollar: 10,
+  save_fit_conversation: 50,
 } as const;
 
 export type PointsEventType = keyof typeof POINTS_RULES;
