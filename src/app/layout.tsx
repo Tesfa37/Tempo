@@ -22,7 +22,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Tempo — Clothes that move at your pace",
+  title: "Tempo, Clothes that move at your pace",
   description:
     "Tempo is a sustainable adaptive fashion brand. Adaptive-first design, GOTS-certified materials, Digital Product Passports, and a Caregiver-First shopping experience.",
   keywords: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "caregiver fashion",
   ],
   openGraph: {
-    title: "Tempo — Clothes that move at your pace",
+    title: "Tempo, Clothes that move at your pace",
     description:
       "Adaptive fashion built with disabled advisors. Sustainable materials, Digital Product Passports, Caregiver Mode.",
     type: "website",
