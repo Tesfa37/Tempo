@@ -93,11 +93,12 @@ export async function redeemReward(
 
   if (!sufficient) return { success: false, error: "insufficient_points" };
 
-  await admin.from("redemptions").insert({
+  const { error: insertError } = await admin.from("redemptions").insert({
     user_id: user.id,
     reward_type: rewardType,
     points_spent: pointsSpent,
   });
+  if (insertError) return { success: false, error: insertError.message };
 
   const { data: profile } = await admin
     .from("profiles")
