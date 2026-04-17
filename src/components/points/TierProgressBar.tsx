@@ -31,7 +31,7 @@ export function TierProgressBar({ points, tier }: TierProgressBarProps) {
   const tierMin = TIERS[tier].min;
   const tierMax = TIERS[nextTier].min;
   const progress = Math.min(100, Math.round(((points - tierMin) / (tierMax - tierMin)) * 100));
-  const remaining = tierMax - points;
+  const remaining = Math.max(0, tierMax - points);
 
   return (
     <div className="flex flex-col gap-2">
@@ -50,7 +50,7 @@ export function TierProgressBar({ points, tier }: TierProgressBarProps) {
         aria-label={`${progress}% of the way to ${nextTier} tier`}
       >
         <div
-          className="h-full rounded-full transition-all duration-500"
+          className="h-full rounded-full motion-safe:transition-all motion-safe:duration-500"
           style={{ width: `${progress}%`, backgroundColor: TIER_COLOR[tier] }}
         />
       </div>
