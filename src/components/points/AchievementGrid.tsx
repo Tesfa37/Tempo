@@ -57,7 +57,7 @@ export function AchievementGrid({ achievements }: AchievementGridProps) {
           return (
             <li
               key={badge.key}
-              className={`flex flex-col items-center gap-2 p-4 rounded-xl border text-center transition-opacity ${
+              className={`flex flex-col items-center gap-2 p-4 rounded-xl border text-center motion-safe:transition-opacity ${
                 earned
                   ? "bg-[#FAFAF7] border-[#C29E5F]/40"
                   : "bg-[#E8DFD2]/50 border-[#D4C9BA] opacity-50"

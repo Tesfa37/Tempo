@@ -22,16 +22,18 @@ export function PointsBadge() {
       .catch(() => null);
   }, []);
 
-  if (!data) return null;
-
   return (
-    <Link
-      href="/rewards"
-      aria-label={`TempoPoints: ${data.points} points, ${data.tier} tier`}
-      className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border transition-colors hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${TIER_COLOR[data.tier]}`}
-    >
-      <span aria-hidden="true">✦</span>
-      {data.points.toLocaleString()} pts
-    </Link>
+    <div aria-live="polite" aria-atomic="true">
+      {data && (
+        <Link
+          href="/rewards"
+          aria-label={`TempoPoints: ${data.points} points, ${data.tier} tier`}
+          className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border motion-safe:transition-colors hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${TIER_COLOR[data.tier]}`}
+        >
+          <span aria-hidden="true">✦</span>
+          {data.points.toLocaleString()} pts
+        </Link>
+      )}
+    </div>
   );
 }
