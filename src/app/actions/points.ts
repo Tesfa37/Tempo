@@ -4,6 +4,7 @@ import { createClient, createServiceClient } from "@/lib/supabase/server";
 import {
   calcTier,
   type PointsEventType,
+  type RedemptionId,
   type TierName,
   type PointsBalance,
   type GuestEvent,
@@ -50,32 +51,38 @@ export async function awardPoints(
   });
   if (insertError) return { success: false, error: insertError.message };
 
-  const { data: profile } = await admin
+  const { data: prevProfile } = await admin
     .from("profiles")
-    .select("points, tier")
+    .select("tier")
     .eq("id", user.id)
     .single();
 
-  const oldTotal = profile?.points ?? 0;
-  const newTotal = oldTotal + points;
-  const oldTier = (profile?.tier as TierName) ?? "Advocate";
-  const newTier = calcTier(newTotal);
+  const oldTier = (prevProfile?.tier as TierName) ?? "Advocate";
 
-  await admin
+  const { data: newTotal, error: rpcError } = await admin.rpc(
+    "increment_user_points",
+    { p_user_id: user.id, p_amount: points }
+  );
+  if (rpcError) return { success: false, error: rpcError.message };
+
+  const newTier = calcTier(newTotal ?? 0);
+
+  const { error: updateError } = await admin
     .from("profiles")
-    .update({ points: newTotal, tier: newTier })
+    .update({ tier: newTier })
     .eq("id", user.id);
+  if (updateError) return { success: false, error: updateError.message };
 
   return {
     success: true,
-    newTotal,
+    newTotal: newTotal ?? 0,
     tier: newTier,
     tierChanged: newTier !== oldTier,
   };
 }
 
 export async function redeemReward(
-  rewardType: string,
+  rewardType: RedemptionId,
   pointsSpent: number
 ): Promise<{ success: boolean; newTotal?: number; error?: string }> {
   const supabase = await createClient();
@@ -109,10 +116,11 @@ export async function redeemReward(
   const newTotal = profile?.points ?? 0;
   const newTier = calcTier(newTotal);
 
-  await admin
+  const { error: updateError } = await admin
     .from("profiles")
     .update({ tier: newTier })
     .eq("id", user.id);
+  if (updateError) return { success: false, error: updateError.message };
 
   return { success: true, newTotal };
 }
