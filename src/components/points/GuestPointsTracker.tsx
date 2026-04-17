@@ -15,7 +15,12 @@ export function queueGuestEvent(
 ) {
   if (typeof window === "undefined") return;
   const raw = localStorage.getItem(GUEST_EVENTS_KEY);
-  const events: GuestEvent[] = raw ? (JSON.parse(raw) as GuestEvent[]) : [];
+  let events: GuestEvent[] = [];
+  try {
+    events = raw ? (JSON.parse(raw) as GuestEvent[]) : [];
+  } catch {
+    localStorage.removeItem(GUEST_EVENTS_KEY);
+  }
   events.push({ eventType, points, metadata, queuedAt: new Date().toISOString() });
   localStorage.setItem(GUEST_EVENTS_KEY, JSON.stringify(events));
 }
@@ -33,7 +38,13 @@ export function GuestPointsTracker() {
       if (event !== "SIGNED_IN") return;
       const raw = localStorage.getItem(GUEST_EVENTS_KEY);
       if (!raw) return;
-      const events: GuestEvent[] = JSON.parse(raw) as GuestEvent[];
+      let events: GuestEvent[];
+      try {
+        events = JSON.parse(raw) as GuestEvent[];
+      } catch {
+        localStorage.removeItem(GUEST_EVENTS_KEY);
+        return;
+      }
       if (events.length === 0) return;
       await migratePoints(events);
       localStorage.removeItem(GUEST_EVENTS_KEY);
