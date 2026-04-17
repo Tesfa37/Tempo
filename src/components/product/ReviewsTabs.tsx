@@ -1,6 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { awardPoints } from "@/app/actions/points";
+import { showEarnToast, showTierUpToast } from "@/components/points/EarnToast";
+import { createClient } from "@/lib/supabase/client";
+import { queueGuestEvent } from "@/components/points/GuestPointsTracker";
 
 interface WearerReview {
   type: "wearer";
@@ -101,6 +106,80 @@ function CaregiverReviewCard({ review }: { review: CaregiverReview }) {
   );
 }
 
+function WriteReviewForm({ type }: { type: "wearer" | "caregiver" }) {
+  const [text, setText] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const eventType =
+    type === "wearer" ? "write_wearer_review" : "write_caregiver_review";
+  const points = 250;
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!text.trim()) return;
+    setLoading(true);
+    const supabase = createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      queueGuestEvent(eventType, points);
+    } else {
+      const result = await awardPoints(eventType, points);
+      if (result.success && !result.skipped) {
+        showEarnToast(points, `Submitted a ${type} review`);
+        if (result.tierChanged && result.tier) showTierUpToast(result.tier);
+      }
+    }
+    setLoading(false);
+    setSubmitted(true);
+  }
+
+  if (submitted) {
+    return (
+      <p className="text-sm text-[#7A8B75] font-medium mt-4">
+        Thank you for your review.
+      </p>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={(e) => void handleSubmit(e)}
+      className="mt-6 bg-[#FAFAF7] border border-[#D4C9BA] rounded-xl p-5"
+    >
+      <p className="text-sm font-semibold text-[#1A1A1A] mb-3">
+        Share your experience
+      </p>
+      <label htmlFor={`review-text-${type}`} className="sr-only">
+        Write your {type} review
+      </label>
+      <textarea
+        id={`review-text-${type}`}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        rows={4}
+        placeholder={
+          type === "wearer"
+            ? "Describe how this garment works for your body and situation."
+            : "Describe the experience from a care perspective."
+        }
+        className="w-full px-4 py-3 rounded-lg border border-[#D4C9BA] bg-[#E8DFD2]/50 text-sm text-[#1A1A1A] placeholder-[#9A9A9A] resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+      />
+      <div className="flex items-center justify-between mt-3">
+        <p className="text-xs text-[#5A5A5A]">Earns 250 Tempo Points</p>
+        <button
+          type="submit"
+          disabled={!text.trim() || loading}
+          className="text-xs font-medium px-4 py-2 rounded bg-[#7A8B75] text-white hover:bg-[#6a7a65] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {loading ? "Submitting..." : "Submit review"}
+        </button>
+      </div>
+    </form>
+  );
+}
+
 export function ReviewsTabs() {
   return (
     <section aria-labelledby="reviews-heading">
@@ -133,6 +212,7 @@ export function ReviewsTabs() {
               <WearerReviewCard key={review.name} review={review} />
             ))}
           </div>
+          <WriteReviewForm type="wearer" />
         </TabsContent>
 
         <TabsContent value="caregiver">
@@ -144,6 +224,7 @@ export function ReviewsTabs() {
               />
             ))}
           </div>
+          <WriteReviewForm type="caregiver" />
         </TabsContent>
       </Tabs>
     </section>

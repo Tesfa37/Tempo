@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Mic, MicOff } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -8,6 +9,9 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
+import { awardPoints } from "@/app/actions/points";
+import { showEarnToast, showTierUpToast } from "@/components/points/EarnToast";
 
 export function FitConciergeButton() {
   const [open, setOpen] = useState(false);
@@ -15,6 +19,14 @@ export function FitConciergeButton() {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const { state: micState, supported: micSupported, start: micStart, stop: micStop } =
+    useSpeechRecognition({
+      onResult: (text, isFinal) => {
+        setInput(text);
+        if (isFinal) micStop();
+      },
+    });
 
   async function handleAsk() {
     if (!input.trim()) return;
@@ -49,6 +61,11 @@ export function FitConciergeButton() {
         fullText += decoder.decode(value, { stream: true });
         setResponse(fullText);
       }
+      const pointResult = await awardPoints("complete_fit_concierge", 50);
+      if (pointResult.success && !pointResult.skipped) {
+        showEarnToast(50, "Used the Fit Concierge");
+        if (pointResult.tierChanged && pointResult.tier) showTierUpToast(pointResult.tier);
+      }
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -66,6 +83,7 @@ export function FitConciergeButton() {
     <>
       <button
         type="button"
+        data-fit-concierge-trigger
         onClick={() => setOpen(true)}
         className="w-full py-3 px-6 rounded-lg bg-[#C29E5F] text-white font-medium text-sm hover:bg-[#a8874f] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] focus-visible:ring-offset-2"
       >
@@ -85,12 +103,37 @@ export function FitConciergeButton() {
 
           <div className="px-6 py-6 flex flex-col gap-5">
             <div>
-              <label
-                htmlFor="fit-concierge-input"
-                className="block text-sm font-medium text-[#1A1A1A] mb-2"
-              >
-                Tell me about your fit needs
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label
+                  htmlFor="fit-concierge-input"
+                  className="text-sm font-medium text-[#1A1A1A]"
+                >
+                  Tell me about your fit needs
+                </label>
+                {micSupported && (
+                  <button
+                    type="button"
+                    onClick={micState === "listening" ? micStop : micStart}
+                    aria-label={
+                      micState === "listening"
+                        ? "Stop voice input"
+                        : "Start voice input"
+                    }
+                    aria-pressed={micState === "listening"}
+                    className={`p-1.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${
+                      micState === "listening"
+                        ? "bg-[#C4725A] text-white"
+                        : "bg-[#E8DFD2] text-[#5A5A5A] hover:bg-[#D4C9BA]"
+                    }`}
+                  >
+                    {micState === "listening" ? (
+                      <MicOff className="h-4 w-4" aria-hidden="true" />
+                    ) : (
+                      <Mic className="h-4 w-4" aria-hidden="true" />
+                    )}
+                  </button>
+                )}
+              </div>
               <textarea
                 id="fit-concierge-input"
                 value={input}

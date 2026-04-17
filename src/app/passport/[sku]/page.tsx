@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { passports } from "@/data/passports";
 import { PassportNarratorButton } from "@/components/passport/PassportNarratorButton";
+import { PassportQR } from "@/components/passport/PassportQR";
+import { DppScanTracker } from "@/components/points/DppScanTracker";
 
 export async function generateStaticParams() {
   const { passports } = await import("@/data/passports");
@@ -86,51 +88,60 @@ export default async function PassportPage({
       {/* ── Product Header ─────────────────────────────────────────────────── */}
       <div className="bg-[#1A1A1A] text-[#FAFAF7] py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-wrap items-start gap-3 mb-3">
-            <span className="text-xs font-mono bg-[#C29E5F]/20 text-[#C29E5F] border border-[#C29E5F]/40 px-2.5 py-1 rounded-md tracking-wide">
-              {passport.sku}
-            </span>
-            <span className="text-xs bg-[#7A8B75]/20 text-[#7A8B75] border border-[#7A8B75]/40 px-2.5 py-1 rounded-md">
-              v{passport.passportVersion}
-            </span>
-          </div>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+            {/* Left: identity text */}
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-start gap-3 mb-3">
+                <span className="text-xs font-mono bg-[#C29E5F]/20 text-[#C29E5F] border border-[#C29E5F]/40 px-2.5 py-1 rounded-md tracking-wide">
+                  {passport.sku}
+                </span>
+                <span className="text-xs bg-[#7A8B75]/20 text-[#7A8B75] border border-[#7A8B75]/40 px-2.5 py-1 rounded-md">
+                  v{passport.passportVersion}
+                </span>
+              </div>
 
-          <h1 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FAFAF7] mb-3 leading-tight">
-            {passport.productName}
-          </h1>
+              <h1 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FAFAF7] mb-3 leading-tight">
+                {passport.productName}
+              </h1>
 
-          <p className="font-mono text-[#C29E5F] text-sm mb-3 tracking-wider">
-            GTIN: {passport.gtin}
-          </p>
+              <p className="font-mono text-[#C29E5F] text-sm mb-3 tracking-wider">
+                GTIN: {passport.gtin}
+              </p>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#D4C9BA] mb-5">
-            <span>Last updated: {formatDate(passport.lastUpdated)}</span>
-            <span>Issued: {formatDate(passport.issueDate)}</span>
-          </div>
+              <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#D4C9BA] mb-5">
+                <span>Last updated: {formatDate(passport.lastUpdated)}</span>
+                <span>Issued: {formatDate(passport.issueDate)}</span>
+              </div>
 
-          {/* Verification badge */}
-          <div className="inline-flex items-center gap-2 bg-[#7A8B75]/20 border border-[#7A8B75]/40 rounded-lg px-3 py-2">
-            {/* Checkmark icon */}
-            <svg
-              aria-hidden="true"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className="shrink-0"
-            >
-              <circle cx="8" cy="8" r="7.5" stroke="#7A8B75" />
-              <path
-                d="M4.5 8l2.5 2.5 4.5-5"
-                stroke="#7A8B75"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span className="text-xs text-[#7A8B75] font-medium">
-              Verified by GS1 Digital Link Standard v1.2
-            </span>
+              {/* Verification badge */}
+              <div className="inline-flex items-center gap-2 bg-[#7A8B75]/20 border border-[#7A8B75]/40 rounded-lg px-3 py-2">
+                <svg
+                  aria-hidden="true"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  className="shrink-0"
+                >
+                  <circle cx="8" cy="8" r="7.5" stroke="#7A8B75" />
+                  <path
+                    d="M4.5 8l2.5 2.5 4.5-5"
+                    stroke="#7A8B75"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span className="text-xs text-[#7A8B75] font-medium">
+                  Verified by GS1 Digital Link Standard v1.2
+                </span>
+              </div>
+            </div>
+
+            {/* Right: scannable QR */}
+            <div className="shrink-0">
+              <PassportQR sku={passport.sku} productName={passport.productName} />
+            </div>
           </div>
         </div>
       </div>
@@ -545,6 +556,7 @@ export default async function PassportPage({
           </p>
         </div>
       </div>
+      <DppScanTracker sku={passport.sku} productName={passport.productName} />
     </div>
   );
 }
