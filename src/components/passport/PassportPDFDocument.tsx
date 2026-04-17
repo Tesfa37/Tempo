@@ -223,6 +223,7 @@ export function PassportPDFDocument({ passport, qrDataUri }: Props) {
             <Text style={s.meta}>Version: v{passport.passportVersion}</Text>
           </View>
           <View style={s.qrBlock}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text -- @react-pdf/renderer Image is a PDF primitive, not an HTML img */}
             <Image src={qrDataUri} style={{ width: 88, height: 88 }} />
             <Text style={s.qrCaption}>tempo.style/passport/{passport.sku}</Text>
           </View>
