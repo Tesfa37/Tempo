@@ -85,7 +85,7 @@ export function CaregiverOnboarding({ initial }: Props) {
                 <p className="text-sm font-medium text-[#1A1A1A]">{r.display_name}</p>
                 <p className="text-xs text-[#5A5A5A] mt-0.5">
                   Top: {r.sizes.top}, Bottom: {r.sizes.bottom}
-                  {r.conditions.length > 0 && ` -- ${r.conditions.join(", ")}`}
+                  {r.conditions.length > 0 && `, ${r.conditions.join(", ")}`}
                 </p>
               </div>
               <button
@@ -100,9 +100,9 @@ export function CaregiverOnboarding({ initial }: Props) {
         </ul>
       )}
 
-      {isPending && (
-        <p className="text-xs text-[#9A9A9A] mt-2" aria-live="polite">Saving...</p>
-      )}
+      <p className="text-xs text-[#9A9A9A] mt-2" aria-live="polite" aria-atomic="true">
+        {isPending ? "Saving..." : ""}
+      </p>
       {error && (
         <p className="text-sm text-[#C4725A] mt-2" role="alert">{error}</p>
       )}

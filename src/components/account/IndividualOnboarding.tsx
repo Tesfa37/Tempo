@@ -9,7 +9,7 @@ const SHOE_SIZES = ["5", "6", "7", "8", "9", "10", "11", "12", "13"];
 const CONDITIONS: { value: string; label: string }[] = [
   { value: "arthritis", label: "Arthritis" },
   { value: "post-stroke", label: "Post-stroke" },
-  { value: "wheelchair", label: "Wheelchair user" },
+  { value: "wheelchair", label: "Wheelchair mobility" },
   { value: "limited-mobility", label: "Limited mobility" },
   { value: "sensory", label: "Sensory sensitivities" },
   { value: "dementia", label: "Dementia" },
@@ -32,6 +32,7 @@ export function IndividualOnboarding({ initial }: Props) {
   const [error, setError] = useState("");
 
   function toggleCondition(value: string) {
+    setSaved(false);
     setConditions((prev) =>
       prev.includes(value) ? prev.filter((c) => c !== value) : [...prev, value]
     );
@@ -72,7 +73,7 @@ export function IndividualOnboarding({ initial }: Props) {
               <select
                 id="fit-top"
                 value={top}
-                onChange={(e) => setTop(e.target.value)}
+                onChange={(e) => { setTop(e.target.value); setSaved(false); }}
                 className="w-full px-3 py-2 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-sm text-[#1A1A1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
               >
                 <option value="">Select</option>
@@ -84,7 +85,7 @@ export function IndividualOnboarding({ initial }: Props) {
               <select
                 id="fit-bottom"
                 value={bottom}
-                onChange={(e) => setBottom(e.target.value)}
+                onChange={(e) => { setBottom(e.target.value); setSaved(false); }}
                 className="w-full px-3 py-2 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-sm text-[#1A1A1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
               >
                 <option value="">Select</option>
@@ -96,7 +97,7 @@ export function IndividualOnboarding({ initial }: Props) {
               <select
                 id="fit-shoe"
                 value={shoe}
-                onChange={(e) => setShoe(e.target.value)}
+                onChange={(e) => { setShoe(e.target.value); setSaved(false); }}
                 className="w-full px-3 py-2 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-sm text-[#1A1A1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
               >
                 <option value="">Select</option>
@@ -142,7 +143,7 @@ export function IndividualOnboarding({ initial }: Props) {
           <textarea
             id="fit-notes"
             value={notes}
-            onChange={(e) => setNotes(e.target.value)}
+            onChange={(e) => { setNotes(e.target.value); setSaved(false); }}
             rows={3}
             placeholder="e.g. prefer loose fit, sensitive to seams, need extra room in the shoulders"
             className="w-full px-4 py-3 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-sm text-[#1A1A1A] placeholder-[#9A9A9A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] resize-none"

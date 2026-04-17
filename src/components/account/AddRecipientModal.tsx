@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import type { CareRecipient } from "@/lib/types/account";
 
@@ -9,7 +9,7 @@ const SHOE_SIZES = ["5", "6", "7", "8", "9", "10", "11", "12", "13"];
 const CONDITIONS: { value: string; label: string }[] = [
   { value: "arthritis", label: "Arthritis" },
   { value: "post-stroke", label: "Post-stroke" },
-  { value: "wheelchair", label: "Wheelchair user" },
+  { value: "wheelchair", label: "Wheelchair mobility" },
   { value: "limited-mobility", label: "Limited mobility" },
   { value: "sensory", label: "Sensory sensitivities" },
   { value: "dementia", label: "Dementia" },
@@ -29,6 +29,41 @@ export function AddRecipientModal({ open, initial, onSave, onClose }: Props) {
   const [bottomSize, setBottomSize] = useState("");
   const [shoeSize, setShoeSize] = useState("");
   const [notes, setNotes] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    function getFocusable() {
+      return Array.from(
+        container!.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+      );
+    }
+
+    getFocusable()[0]?.focus();
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") { onClose(); return; }
+      if (e.key !== "Tab") return;
+      const els = getFocusable();
+      if (els.length === 0) return;
+      const first = els[0] as HTMLElement | undefined;
+      const last = els[els.length - 1] as HTMLElement | undefined;
+      if (!first || !last) return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, onClose]);
 
   useEffect(() => {
     if (initial) {
@@ -71,6 +106,7 @@ export function AddRecipientModal({ open, initial, onSave, onClose }: Props) {
 
   return (
     <div
+      ref={containerRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="recipient-modal-title"

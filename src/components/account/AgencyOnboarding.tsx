@@ -49,7 +49,7 @@ export function AgencyOnboarding({ initial }: Props) {
             id="facility-name"
             type="text"
             value={facilityName}
-            onChange={(e) => setFacilityName(e.target.value)}
+            onChange={(e) => { setFacilityName(e.target.value); setSaved(false); }}
             required
             placeholder="e.g. Sunrise Memory Care, Room 4B"
             className="w-full px-4 py-2.5 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-sm text-[#1A1A1A] placeholder-[#9A9A9A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
@@ -62,7 +62,7 @@ export function AgencyOnboarding({ initial }: Props) {
             <input
               type="checkbox"
               checked={bulkOrder}
-              onChange={(e) => setBulkOrder(e.target.checked)}
+              onChange={(e) => { setBulkOrder(e.target.checked); setSaved(false); }}
               className="mt-0.5 rounded border-[#D4C9BA] text-[#C29E5F] focus-visible:ring-[#C29E5F]"
             />
             <span className="text-sm text-[#1A1A1A]">
@@ -76,7 +76,7 @@ export function AgencyOnboarding({ initial }: Props) {
             <input
               type="checkbox"
               checked={net30}
-              onChange={(e) => setNet30(e.target.checked)}
+              onChange={(e) => { setNet30(e.target.checked); setSaved(false); }}
               className="mt-0.5 rounded border-[#D4C9BA] text-[#C29E5F] focus-visible:ring-[#C29E5F]"
             />
             <span className="text-sm text-[#1A1A1A]">
