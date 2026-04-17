@@ -11,11 +11,14 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { getProductBySlug } from "@/data/products";
+import { productImages } from "@/data/imagery-manifest";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { SizeSelector } from "@/components/product/SizeSelector";
 import { NotifyButton } from "@/components/product/NotifyButton";
 import { FitConciergeButton } from "@/components/product/FitConciergeButton";
 import { ReviewsTabs } from "@/components/product/ReviewsTabs";
+import { PricingEquityDisclosure } from "@/components/product/PricingEquityDisclosure";
+import { Camera } from "lucide-react";
 
 // ─── Static params ───────────────────────────────────────────────────────────
 
@@ -122,11 +125,6 @@ export default async function ProductDetailPage({
     notFound();
   }
 
-  const isFeatured = product.isFeatured;
-  const gradient = isFeatured
-    ? "from-[#C29E5F] to-[#E8DFD2]"
-    : "from-[#7A8B75] to-[#E8DFD2]";
-
   return (
     <div className="bg-[#E8DFD2] min-h-screen">
       {/* Breadcrumb */}
@@ -168,8 +166,11 @@ export default async function ProductDetailPage({
           <div>
             <ProductGallery
               productName={product.name}
-              imageCount={product.images.length}
-              gradient={gradient}
+              images={product.images}
+              imageMeta={product.images.map((p) => ({
+                alt: productImages[p]?.alt ?? product.name,
+                blurDataURL: productImages[p]?.blurDataURL ?? "",
+              }))}
             />
           </div>
 
@@ -191,6 +192,9 @@ export default async function ProductDetailPage({
                 ${product.price}
               </p>
             </div>
+
+            {/* Financial support */}
+            <PricingEquityDisclosure />
 
             {/* Description */}
             <p className="text-[#5A5A5A] leading-relaxed">
@@ -263,6 +267,16 @@ export default async function ProductDetailPage({
 
             {/* Notify button */}
             <NotifyButton />
+
+            {/* AR Try-On CTA */}
+            <Link
+              href={`/try-on/${product.slug}`}
+              aria-label={`Try on ${product.name} in augmented reality`}
+              className="inline-flex items-center justify-center gap-2 w-full border border-[#C29E5F] text-[#C29E5F] text-sm font-medium px-4 py-2.5 rounded hover:bg-[#C29E5F]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+            >
+              <Camera className="h-4 w-4 shrink-0" aria-hidden="true" />
+              Try it on in AR
+            </Link>
 
             {/* Fit Concierge */}
             <FitConciergeButton />

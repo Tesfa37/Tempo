@@ -1,27 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+
+export interface ImageMeta {
+  alt: string;
+  blurDataURL: string;
+}
 
 interface ProductGalleryProps {
   productName: string;
-  imageCount: number;
-  gradient?: string;
+  images: string[];
+  imageMeta: ImageMeta[];
 }
-
-const THUMB_GRADIENTS = [
-  "from-[#C29E5F] to-[#E8DFD2]",
-  "from-[#7A8B75] to-[#D4C9BA]",
-  "from-[#C4725A] to-[#E8DFD2]",
-];
 
 export function ProductGallery({
   productName,
-  imageCount,
-  gradient = "from-[#C29E5F] to-[#E8DFD2]",
+  images,
+  imageMeta,
 }: ProductGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const thumbnailCount = Math.min(imageCount, 3);
 
   function handleKeyDown(
     e: React.KeyboardEvent<HTMLButtonElement>,
@@ -33,38 +31,72 @@ export function ProductGallery({
     }
   }
 
+  const activeSrc = images[activeIndex];
+  const activeMeta = imageMeta[activeIndex];
+
   return (
     <div className="flex flex-col gap-4">
       {/* Main display */}
-      <div
-        className={`h-96 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center border border-[#D4C9BA]`}
-        role="img"
-        aria-label={`${productName} — product view ${activeIndex + 1}`}
-      >
-        <span className="font-playfair text-xl text-white/80 text-center px-6">
-          {productName}
-        </span>
+      <div className="relative h-96 rounded-xl overflow-hidden border border-[#D4C9BA]">
+        {activeSrc && activeMeta ? (
+          <Image
+            src={activeSrc}
+            alt={activeMeta.alt}
+            fill
+            className="object-cover"
+            placeholder="blur"
+            blurDataURL={activeMeta.blurDataURL}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority={activeIndex === 0}
+          />
+        ) : (
+          <div
+            className="h-full bg-[#E8DFD2] flex items-center justify-center"
+            role="img"
+            aria-label={`${productName} — image unavailable`}
+          >
+            <span className="font-playfair text-xl text-[#5A5A5A] text-center px-6">
+              {productName}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Thumbnail row */}
-      <div className="flex gap-3" role="group" aria-label="Product views">
-        {Array.from({ length: thumbnailCount }, (_, i) => (
-          <button
-            key={i}
-            type="button"
-            tabIndex={0}
-            aria-label={`View ${productName} — angle ${i + 1}`}
-            aria-pressed={activeIndex === i}
-            onClick={() => setActiveIndex(i)}
-            onKeyDown={(e) => handleKeyDown(e, i)}
-            className={`h-20 w-20 rounded-lg bg-gradient-to-br ${THUMB_GRADIENTS[i] ?? THUMB_GRADIENTS[0]} border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${
-              activeIndex === i
-                ? "border-[#C29E5F]"
-                : "border-[#D4C9BA] opacity-60 hover:opacity-100"
-            }`}
-          />
-        ))}
-      </div>
+      {images.length > 1 && (
+        <div className="flex gap-3" role="group" aria-label="Product views">
+          {images.map((src, i) => {
+            const meta = imageMeta[i];
+            return (
+              <button
+                key={src}
+                type="button"
+                aria-label={`View ${productName} — ${meta?.alt ?? `angle ${i + 1}`}`}
+                aria-pressed={activeIndex === i}
+                onClick={() => setActiveIndex(i)}
+                onKeyDown={(e) => handleKeyDown(e, i)}
+                className={`relative h-20 w-20 rounded-lg overflow-hidden border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${
+                  activeIndex === i
+                    ? "border-[#C29E5F]"
+                    : "border-[#D4C9BA] opacity-60 hover:opacity-100"
+                }`}
+              >
+                {meta && (
+                  <Image
+                    src={src}
+                    alt={meta.alt}
+                    fill
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={meta.blurDataURL}
+                    sizes="80px"
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
