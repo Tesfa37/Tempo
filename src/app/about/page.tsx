@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { AdvisorAvatar } from "@/components/ui/AdvisorAvatar";
 
 export const metadata: Metadata = {
   title: "About Tempo — Our Story",
@@ -56,7 +58,7 @@ const advisors = [
 const commitments = [
   {
     heading: "Design with, not for",
-    body: "Every garment design goes through our disabled advisory board before production. Disabled advisors are compensated at consultant rates and credited publicly.",
+    body: "Every garment design goes through our disabled advisory board before production. Disabled advisors are compensated at $175 per consulting hour plus a 0.5 percent royalty on every piece they co-designed. Every advisor is credited by name with a linked portfolio.",
   },
   {
     heading: "Transparent materials",
@@ -132,13 +134,13 @@ export default function AboutPage() {
             {/* Tesfa Desta */}
             <div className="bg-[#E8DFD2] border border-[#D4C9BA] rounded-xl p-6 flex flex-col gap-4">
               {/* Avatar */}
-              <div
-                className="w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold text-[#1A1A1A] shrink-0"
-                style={{ backgroundColor: "#C29E5F" }}
-                aria-hidden="true"
-              >
-                T.D.
-              </div>
+              <AdvisorAvatar
+                initials="T.D."
+                name="Tesfa Desta"
+                avatarBg="#C29E5F"
+                avatarText="#1A1A1A"
+                size="md"
+              />
               <div>
                 <h3 className="font-playfair text-xl font-semibold text-[#1A1A1A]">
                   Tesfa Desta
@@ -159,13 +161,13 @@ export default function AboutPage() {
             {/* Bityana Yishak */}
             <div className="bg-[#E8DFD2] border border-[#D4C9BA] rounded-xl p-6 flex flex-col gap-4">
               {/* Avatar */}
-              <div
-                className="w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold text-[#FAFAF7] shrink-0"
-                style={{ backgroundColor: "#7A8B75" }}
-                aria-hidden="true"
-              >
-                B.Y.
-              </div>
+              <AdvisorAvatar
+                initials="B.Y."
+                name="Bityana Yishak"
+                avatarBg="#7A8B75"
+                avatarText="#FAFAF7"
+                size="md"
+              />
               <div>
                 <h3 className="font-playfair text-xl font-semibold text-[#1A1A1A]">
                   Bityana Yishak
@@ -213,16 +215,13 @@ export default function AboutPage() {
                 className="bg-[#FAFAF7] border border-[#D4C9BA] rounded-xl p-6 flex flex-col gap-4"
               >
                 {/* Avatar */}
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
-                  style={{
-                    backgroundColor: advisor.avatarBg,
-                    color: advisor.avatarText,
-                  }}
-                  aria-hidden="true"
-                >
-                  {advisor.initials}
-                </div>
+                <AdvisorAvatar
+                  initials={advisor.initials}
+                  name={advisor.name}
+                  avatarBg={advisor.avatarBg}
+                  avatarText={advisor.avatarText}
+                  size="sm"
+                />
 
                 <div>
                   <h3 className="font-semibold text-[#1A1A1A] text-base mb-0.5">
@@ -238,6 +237,18 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+
+          <p className="text-sm italic text-neutral-600 mt-8">
+            Compensation is disclosed annually in our public advisor compensation
+            report. First report due Q1 2027 at{" "}
+            <Link
+              href="/governance"
+              className="underline underline-offset-2 hover:text-neutral-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+            >
+              tempo.style/governance
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
