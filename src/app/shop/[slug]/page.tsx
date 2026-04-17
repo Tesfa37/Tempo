@@ -54,6 +54,9 @@ export async function generateMetadata({
       description: product.description,
       images: [ogImage],
     },
+    alternates: {
+      canonical: `/shop/${slug}`,
+    },
   };
 }
 

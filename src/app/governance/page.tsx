@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Advisor Governance | Tempo",
   description:
     "Tempo's advisor compensation structure, representation policy, decision authority, and conflict resolution commitment.",
+  alternates: {
+    canonical: "/governance",
+  },
 };
 
 function PolicySection({

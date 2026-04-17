@@ -5,6 +5,9 @@ export const metadata = {
   title: "Shop — Tempo Adaptive Fashion",
   description:
     "Browse the full Tempo collection. Adaptive clothing for wheelchair users, post-stroke recovery, sensory needs, arthritis, and dementia care.",
+  alternates: {
+    canonical: "/shop",
+  },
 };
 
 export default function ShopPage() {

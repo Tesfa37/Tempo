@@ -2,6 +2,11 @@ import Link from "next/link";
 
 export const metadata = {
   title: "How TempoPoints Work, Tempo",
+  description:
+    "Learn how TempoPoints are earned and weighted by sustainability impact. Scan passports, complete take-backs, refer caregivers, and more.",
+  alternates: {
+    canonical: "/points/how-it-works",
+  },
 };
 
 const ACTIONS = [

@@ -4,6 +4,11 @@ import { createServiceClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "Community Leaderboard, TempoPoints",
+  description:
+    "See the top TempoPoints earners in the Tempo community. Rankings reset quarterly and celebrate sustainable actions.",
+  alternates: {
+    canonical: "/rewards/leaderboard",
+  },
 };
 
 export default async function LeaderboardPage() {

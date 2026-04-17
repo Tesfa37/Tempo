@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "About Tempo, Our Story",
   description:
     "Tempo was built by two former home care workers who saw the cost of clothing designed without disabled people in mind. This is our story.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About Tempo, Our Story",
     description:

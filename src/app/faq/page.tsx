@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Frequently Asked Questions | Tempo",
   description:
     "Answers to common questions about Tempo adaptive clothing: sizing, adaptive features, sustainability, Digital Product Passports, shipping and returns, and financial support.",
+  alternates: {
+    canonical: "/faq",
+  },
   openGraph: {
     title: "Frequently Asked Questions | Tempo",
     description:

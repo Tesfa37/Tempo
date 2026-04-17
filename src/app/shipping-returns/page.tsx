@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Shipping and Returns | Tempo",
   description:
     "Shipping rates for US, Canada, EU, and UK. 60 to 120 day returns depending on account type. Take-Back eligible at any condition for 1,000 TempoPoints.",
+  alternates: {
+    canonical: "/shipping-returns",
+  },
 };
 
 function Section({

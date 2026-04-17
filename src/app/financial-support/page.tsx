@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Financial Support for Adaptive Clothing | Tempo",
   description:
     "HSA/FSA reimbursement, Medicaid pathways, Veterans Affairs clothing allowance, and caregiver agency bulk pricing for Tempo adaptive garments.",
+  alternates: {
+    canonical: "/financial-support",
+  },
 };
 
 function PolicySection({

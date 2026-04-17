@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Accessibility Statement, Tempo",
   description:
     "Tempo's commitment to WCAG 2.1 AA conformance, accessibility features, known limitations, and how to report accessibility barriers.",
+  alternates: {
+    canonical: "/accessibility",
+  },
 };
 
 // ─── Sub-components ───────────────────────────────────────────────────────────

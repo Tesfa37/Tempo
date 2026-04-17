@@ -15,6 +15,7 @@ const footerLinks = {
     { href: "/accessibility", label: "Accessibility statement" },
   ],
   Resources: [
+    { href: "/search", label: "Site search" },
     { href: "/passport", label: "Digital Product Passport" },
     { href: "/faq", label: "FAQ" },
     { href: "/financial-support", label: "Financial support" },

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Digital Product Passports | Tempo",
   description:
     "ESPR-aligned digital product passports for every Tempo garment. Scan any QR at the garment tag or browse the gallery.",
+  alternates: {
+    canonical: "/passport",
+  },
 };
 
 export default function PassportIndexPage() {

@@ -37,6 +37,9 @@ export async function generateMetadata({
       description,
       images: [ogImage],
     },
+    alternates: {
+      canonical: `/passport/${sku}`,
+    },
   };
 }
 

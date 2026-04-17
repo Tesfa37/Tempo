@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Image Credits, Tempo",
   description:
     "Attribution for all photography used on the Tempo website, including photographer credits, image sources, and license information.",
+  alternates: {
+    canonical: "/credits",
+  },
 };
 
 function CreditsList({
