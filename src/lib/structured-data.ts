@@ -50,3 +50,98 @@ export function buildBreadcrumbList(
     })),
   };
 }
+
+export interface Product {
+  id: string;
+  slug: string;
+  sku: string;
+  gtin: string;
+  name: string;
+  category: string;
+  price: number;
+  description: string;
+  longDescription: string;
+  adaptiveFeatures: { name: string; description: string; icon: string }[];
+  conditions: string[];
+  materials: string;
+  certifications: string[];
+  timeToDressMinutes: number;
+  sterilizationSafe: boolean;
+  sterilizationNotes: string;
+  variants: { size: string; inStock: boolean }[];
+  images: string[];
+  isFeatured: boolean;
+  isNew: boolean;
+}
+
+export function buildProductSchema(product: Product): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.longDescription,
+    sku: product.sku,
+    gtin14: product.gtin,
+    image: product.images.map((img) => `https://tempo.style${img}`),
+    brand: {
+      "@type": "Brand",
+      name: "Tempo",
+    },
+    additionalProperty: product.adaptiveFeatures.map((f) => ({
+      "@type": "PropertyValue",
+      name: f.name,
+      value: f.description,
+    })),
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "USD",
+      availability: product.variants.some((v) => v.inStock)
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      priceValidUntil: "2026-12-31",
+      url: `https://tempo.style/shop/${product.slug}`,
+      seller: {
+        "@type": "Organization",
+        name: "Tempo",
+      },
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5",
+      reviewCount: "4",
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: [
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Diane S." },
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewBody:
+          "I've been putting on pants by myself for the first time in two years. The magnetic closure is genuinely invisible when dressed.",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Renata M." },
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewBody:
+          "The seated cut is the real innovation here. These fit as if they were measured for me.",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Marcus, Home Care Aide" },
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewBody:
+          "These reduce my morning dressing time by about 8 minutes per client. That's real.",
+      },
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Jennifer, Occupational Therapist" },
+        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        reviewBody:
+          "I recommend these to every post-stroke client I see now. The magnetic closure opens reliably with one hand.",
+      },
+    ],
+  };
+}

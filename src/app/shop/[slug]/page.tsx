@@ -19,6 +19,8 @@ import { FitConciergeButton } from "@/components/product/FitConciergeButton";
 import { ReviewsTabs } from "@/components/product/ReviewsTabs";
 import { PricingEquityDisclosure } from "@/components/product/PricingEquityDisclosure";
 import { Camera } from "lucide-react";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { buildBreadcrumbList, buildProductSchema } from "@/lib/structured-data";
 
 // ─── Static params ───────────────────────────────────────────────────────────
 
@@ -346,6 +348,16 @@ export default async function ProductDetailPage({
         <div className="mt-16 pt-12 border-t border-[#D4C9BA]">
           <ReviewsTabs />
         </div>
+
+        {/* ── Structured Data (SEO) ─────────────────────────────────────── */}
+        <StructuredData
+          data={buildBreadcrumbList([
+            { name: "Home", url: "https://tempo.style" },
+            { name: "Shop", url: "https://tempo.style/shop" },
+            { name: product.name, url: `https://tempo.style/shop/${product.slug}` },
+          ])}
+        />
+        <StructuredData data={buildProductSchema(product)} />
       </div>
     </div>
   );
