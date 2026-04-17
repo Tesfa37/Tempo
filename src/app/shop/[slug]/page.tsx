@@ -13,8 +13,7 @@ import {
 import { getProductBySlug } from "@/data/products";
 import { productImages } from "@/data/imagery-manifest";
 import { ProductGallery } from "@/components/product/ProductGallery";
-import { SizeSelector } from "@/components/product/SizeSelector";
-import { NotifyButton } from "@/components/product/NotifyButton";
+import { ProductAddToCart } from "@/components/product/ProductAddToCart";
 import { FitConciergeButton } from "@/components/product/FitConciergeButton";
 import { ReviewsTabs } from "@/components/product/ReviewsTabs";
 import { PricingEquityDisclosure } from "@/components/product/PricingEquityDisclosure";
@@ -39,9 +38,22 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return {};
+  const ogImage = `/shop/${slug}/opengraph-image`;
   return {
-    title: `${product.name} — Tempo Adaptive Fashion`,
+    title: `${product.name}, Tempo Adaptive Fashion`,
     description: product.description,
+    openGraph: {
+      title: `${product.name}, Tempo Adaptive Fashion`,
+      description: product.description,
+      type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: `${product.name}, Tempo Adaptive Fashion`,
+      description: product.description,
+      images: [ogImage],
+    },
   };
 }
 
@@ -264,11 +276,8 @@ export default async function ProductDetailPage({
               ))}
             </div>
 
-            {/* Size selector */}
-            <SizeSelector variants={product.variants} />
-
-            {/* Notify button */}
-            <NotifyButton />
+            {/* Size selector + Add to cart */}
+            <ProductAddToCart product={product} />
 
             {/* AR Try-On CTA */}
             <Link

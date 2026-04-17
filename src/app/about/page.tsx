@@ -8,6 +8,20 @@ export const metadata: Metadata = {
   title: "About Tempo, Our Story",
   description:
     "Tempo was built by two former home care workers who saw the cost of clothing designed without disabled people in mind. This is our story.",
+  openGraph: {
+    title: "About Tempo, Our Story",
+    description:
+      "Tempo was built by two former home care workers who saw the cost of clothing designed without disabled people in mind. This is our story.",
+    type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Tempo, Our Story",
+    description:
+      "Tempo was built by two former home care workers who saw the cost of clothing designed without disabled people in mind. This is our story.",
+    images: ["/opengraph-image"],
+  },
 };
 
 // ─── Advisory Board Data ──────────────────────────────────────────────────────

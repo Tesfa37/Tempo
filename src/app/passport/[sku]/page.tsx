@@ -11,6 +11,35 @@ export async function generateStaticParams() {
   return Object.keys(passports).map((sku) => ({ sku }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ sku: string }>;
+}) {
+  const { sku } = await params;
+  const passport = passports[sku];
+  if (!passport) return {};
+  const title = `Digital Product Passport, ${passport.productName}`;
+  const description = `Full traceability for ${passport.productName}. Fiber origin, certifications, carbon footprint, and sterilization data. ESPR-ready 2027.`;
+  const ogImage = `/passport/${sku}/opengraph-image`;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function formatDate(iso: string): string {
