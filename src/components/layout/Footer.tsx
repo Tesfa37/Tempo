@@ -63,7 +63,7 @@ export function Footer() {
 
         <div className="border-t border-[#2A2A2A] mt-12 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="text-xs text-[#9A9A9A]">
-            &copy; {new Date().getFullYear()} Tempo — Desta &amp; Yishak
+            &copy; {new Date().getFullYear()} Tempo, Desta &amp; Yishak
             Consulting. CICDC 2026.
           </p>
           <Link

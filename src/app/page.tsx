@@ -28,7 +28,7 @@ const pillars = [
   {
     icon: Users,
     title: "Caregiver-First UX",
-    body: "Toggle Caregiver Mode. Time-to-dress estimates, sterilization labels, condition filters — your workflow, respected.",
+    body: "Toggle Caregiver Mode. Time-to-dress estimates, sterilization labels, condition filters, your workflow respected.",
   },
 ];
 
@@ -59,7 +59,7 @@ function NewsletterSection() {
           Stay in the loop
         </h2>
         <p className="text-[#D4C9BA] mb-8">
-          New collections, product launches, and care guides — straight to your inbox.
+          New collections, product launches, and care guides, straight to your inbox.
         </p>
 
         {/* Tab toggle */}

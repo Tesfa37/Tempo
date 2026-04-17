@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AdvisorAvatar } from "@/components/ui/AdvisorAvatar";
 
 export const metadata: Metadata = {
-  title: "About Tempo — Our Story",
+  title: "About Tempo, Our Story",
   description:
     "Tempo was built by two former home care workers who saw the cost of clothing designed without disabled people in mind. This is our story.",
 };
@@ -62,7 +62,7 @@ const commitments = [
   },
   {
     heading: "Transparent materials",
-    body: "Every garment ships with a Digital Product Passport. Fiber composition, factory location, certifications, carbon footprint — all publicly accessible, scannable at the tag.",
+    body: "Every garment ships with a Digital Product Passport. Fiber composition, factory location, certifications, carbon footprint, all publicly accessible, scannable at the tag.",
   },
   {
     heading: "Caregiver-first, always",
@@ -98,10 +98,10 @@ export default function AboutPage() {
           <div className="flex flex-col gap-6">
             <p className="text-[#D4C9BA] text-base sm:text-lg leading-relaxed">
               Before we worked in consulting, we both worked in home care. Not
-              as executives visiting a facility — as paid workers doing the
+              as executives visiting a facility, as paid workers doing the
               daily dressing, bathing, and transport for disabled clients. Tesfa
               watched a seated client, sixty-three years old, spend fifteen
-              minutes putting on a pair of four ninety-nine pants — pants
+              minutes putting on a pair of four ninety-nine pants, pants
               designed for two functioning hands. That&apos;s ninety hours a
               year, just for pants.
             </p>
@@ -111,7 +111,7 @@ export default function AboutPage() {
               opening. She was making fourteen dollars an hour. She
               couldn&apos;t afford to take a week off. Fashion wasn&apos;t the
               problem. Fashion had just never been the solution. Tempo is our
-              attempt to change that — not with charity, but with product.
+              attempt to change that, not with charity, but with product.
             </p>
           </div>
         </div>
@@ -202,14 +202,14 @@ export default function AboutPage() {
             </h2>
             <p className="text-[#5A5A5A] text-base sm:text-lg leading-relaxed">
               Disabled people are not our inspiration. They are our advisors,
-              co-designers, and critics — compensated, credited, and present at
+              co-designers, and critics, compensated, credited, and present at
               every product and marketing decision.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {advisors.map((advisor) => (
-              /* PLACEHOLDER — replace with real advisor before launch */
+              /* PLACEHOLDER: replace with real advisor before launch */
               <div
                 key={advisor.name}
                 className="bg-[#FAFAF7] border border-[#D4C9BA] rounded-xl p-6 flex flex-col gap-4"

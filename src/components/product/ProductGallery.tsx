@@ -53,7 +53,7 @@ export function ProductGallery({
           <div
             className="h-full bg-[#E8DFD2] flex items-center justify-center"
             role="img"
-            aria-label={`${productName} — image unavailable`}
+            aria-label={`${productName}, image unavailable`}
           >
             <span className="font-playfair text-xl text-[#5A5A5A] text-center px-6">
               {productName}
@@ -71,11 +71,11 @@ export function ProductGallery({
               <button
                 key={src}
                 type="button"
-                aria-label={`View ${productName} — ${meta?.alt ?? `angle ${i + 1}`}`}
+                aria-label={`View ${productName}, ${meta?.alt ?? `angle ${i + 1}`}`}
                 aria-pressed={activeIndex === i}
                 onClick={() => setActiveIndex(i)}
                 onKeyDown={(e) => handleKeyDown(e, i)}
-                className={`relative h-20 w-20 rounded-lg overflow-hidden border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${
+                className={`relative h-20 w-20 rounded-lg overflow-hidden border-2 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${
                   activeIndex === i
                     ? "border-[#C29E5F]"
                     : "border-[#D4C9BA] opacity-60 hover:opacity-100"
