@@ -213,7 +213,7 @@ export default async function PassportPage({
                           )}
                         </div>
                       ) : (
-                        <span className="text-[#5A5A5A] text-xs">—</span>
+                        <span className="text-[#5A5A5A] text-xs">-</span>
                       )}
                     </td>
                   </tr>
