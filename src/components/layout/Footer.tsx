@@ -17,6 +17,7 @@ const footerLinks = {
   Resources: [
     { href: "/passport", label: "Digital Product Passport" },
     { href: "/financial-support", label: "Financial support" },
+    { href: "/shipping-returns", label: "Shipping and returns" },
     { href: "/accessibility", label: "WCAG 2.1 AA compliance" },
     { href: "/credits", label: "Image credits" },
   ],
