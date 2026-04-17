@@ -153,6 +153,15 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer utilities {
   .text-amber { color: #C29E5F; }
   .text-sage { color: #7A8B75; }
@@ -162,4 +171,6 @@
   .bg-sand { background-color: #E8DFD2; }
   .bg-off-white { background-color: #FAFAF7; }
   .border-sand { border-color: #D4C9BA; }
+  .font-playfair { font-family: var(--font-playfair), Georgia, serif; }
+  .font-inter { font-family: var(--font-inter), system-ui, sans-serif; }
 }
