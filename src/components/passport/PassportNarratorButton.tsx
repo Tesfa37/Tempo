@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Mic, MicOff, Volume2, Pause, Square, FileDown } from "lucide-react";
 import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 
@@ -40,10 +40,10 @@ export function PassportNarratorButton({ sku }: PassportNarratorButtonProps) {
   const [followUpResponse, setFollowUpResponse] = useState("");
   const [followUpStreaming, setFollowUpStreaming] = useState(false);
   const [voiceState, setVoiceState] = useState<VoiceState>("idle");
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
-
-  const hasSpeech =
-    typeof window !== "undefined" && "speechSynthesis" in window;
+  const [hasSpeech, setHasSpeech] = useState(false);
+  useEffect(() => {
+    setHasSpeech(typeof window !== "undefined" && "speechSynthesis" in window);
+  }, []);
 
   const {
     state: micState,
@@ -123,6 +123,7 @@ export function PassportNarratorButton({ sku }: PassportNarratorButtonProps) {
   }
 
   function getPreferredVoice(): SpeechSynthesisVoice | null {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
     const voices = speechSynthesis.getVoices();
     return (
       voices.find(
@@ -149,7 +150,6 @@ export function PassportNarratorButton({ sku }: PassportNarratorButtonProps) {
     const voice = getPreferredVoice();
     if (voice) utterance.voice = voice;
     utterance.onend = () => setVoiceState("idle");
-    utteranceRef.current = utterance;
     speechSynthesis.speak(utterance);
     setVoiceState("speaking");
   }
@@ -336,6 +336,9 @@ export function PassportNarratorButton({ sku }: PassportNarratorButtonProps) {
                 role="region"
                 aria-label="Follow-up answer"
               >
+                {followUpStreaming && !followUpResponse && (
+                  <span className="sr-only">Loading answer...</span>
+                )}
                 {followUpResponse}
                 {followUpStreaming && (
                   <span
