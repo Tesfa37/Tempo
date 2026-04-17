@@ -1,0 +1,50 @@
+import { NextRequest } from "next/server";
+import { renderToBuffer } from "@react-pdf/renderer";
+import QRCode from "qrcode";
+import React from "react";
+import { passports } from "@/data/passports";
+import { PassportPDFDocument } from "@/components/passport/PassportPDFDocument";
+
+export const dynamic = "force-dynamic";
+
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: Promise<{ sku: string }> }
+) {
+  const { sku } = await params;
+  const passport = passports[sku];
+
+  if (!passport) {
+    return new Response(JSON.stringify({ error: "Passport not found" }), {
+      status: 404,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  try {
+    const qrDataUri = await QRCode.toDataURL(
+      `https://tempo.style/passport/${sku}`,
+      { width: 180, margin: 1 }
+    );
+
+    const buffer = await renderToBuffer(
+      React.createElement(PassportPDFDocument, { passport, qrDataUri })
+    );
+
+    return new Response(buffer, {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `attachment; filename="tempo-passport-${sku}.pdf"`,
+        "Cache-Control": "no-store",
+      },
+    });
+  } catch {
+    return new Response(
+      JSON.stringify({ error: "PDF generation failed. Please try again." }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  }
+}
