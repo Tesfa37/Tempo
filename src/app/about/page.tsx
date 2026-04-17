@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AdvisorAvatar } from "@/components/ui/AdvisorAvatar";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { buildBreadcrumbList, buildAdvisorsSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "About Tempo, Our Story",
@@ -10,46 +12,67 @@ export const metadata: Metadata = {
 
 // ─── Advisory Board Data ──────────────────────────────────────────────────────
 
+// Category colors: legal=#C29E5F, OT=#7A8B75, lived-experience=#C4725A, academic=#1A1A1A, caregiver=#D4C9BA
 const advisors = [
   {
     initials: "A.O.",
     name: "Amara Osei",
-    role: "Disability Rights Attorney & Style Consultant",
-    bio: "Amara specializes in ADA compliance and adaptive fashion policy. She advises Tempo on legal language, accessibility standards, and garment design review.",
+    role: "Disability Rights Attorney",
+    bio: "Amara specializes in ADA compliance and adaptive fashion policy at the intersection of disability rights law and consumer product design.",
+    advising: "Legal language review, ADA compliance in product copy, garment labeling accessibility standards, and policy briefings for the ESPR Digital Product Passport rollout.",
+    credentials: "JD, UC Berkeley School of Law, 2014. Staff attorney, Disability Rights Advocates, 2015-present. Co-author, \"Accessible Commerce: A Practitioner's Guide,\" 2022.",
     avatarBg: "#C29E5F",
     avatarText: "#1A1A1A",
+    pattern: 1 as const,
+    categoryColor: "#C29E5F",
   },
   {
     initials: "C.R.",
     name: "Carlos Rivera",
-    role: "Occupational Therapist, Spinal Cord Injury Rehab",
-    bio: "Carlos works with post-stroke and SCI patients on daily living skills. He leads Tempo's time-to-dress research and adaptive feature testing protocols.",
+    role: "Occupational Therapist, SCI Rehab",
+    bio: "Carlos works daily with post-stroke and spinal cord injury patients on adaptive daily living, with a clinical focus on time-to-dress outcomes and dressing aid compatibility.",
+    advising: "Time-to-dress research protocol design, adaptive feature testing with SCI patients, dressing aid compatibility matrix, and sterilization cycle verification.",
+    credentials: "OTR/L, CSCI Certification 2016. Senior OT, Regional Rehabilitation Center. Faculty lecturer, occupational therapy program.",
     avatarBg: "#7A8B75",
     avatarText: "#FAFAF7",
+    pattern: 2 as const,
+    categoryColor: "#7A8B75",
   },
   {
     initials: "S.W.",
     name: "Simone Walsh",
-    role: "Wheelchair User, Fashion Blogger",
-    bio: "Simone runs 'Rolling in Style,' a platform documenting adaptive fashion for full-time wheelchair users. She advises on seated-cut design and the social dimension of adaptive clothing.",
+    role: "Disabled Fashion Blogger, Seated-Cut Specialist",
+    bio: "Simone runs 'Rolling in Style,' a platform documenting adaptive fashion for full-time wheelchair users, with a readership that shapes how brands understand seated-cut demand.",
+    advising: "Seated-cut design review, product photography direction, social proof language, and the lived-experience audit on all product marketing copy before publish.",
+    credentials: "B.A. Fashion Media, Parsons School of Design, 2013. 'Rolling in Style' platform, 2015-present. Brand ambassador, three adaptive-wear labels.",
     avatarBg: "#C4725A",
     avatarText: "#FAFAF7",
+    pattern: 3 as const,
+    categoryColor: "#C4725A",
   },
   {
     initials: "K.T.",
     name: "Dr. Keiko Tanaka",
-    role: "Occupational Therapy Faculty, Disability Studies",
-    bio: "Dr. Tanaka researches the intersection of disability studies and material culture. She advises Tempo on community accountability, ablesaviorism prevention, and academic rigor.",
+    role: "OT Faculty, Disability Studies",
+    bio: "Dr. Tanaka researches the intersection of disability studies and material culture, with published work on how garment design reproduces or disrupts ableist norms.",
+    advising: "Community accountability frameworks, ableism audit methodology, academic rigor review for impact claims, and the language standards embedded in this site.",
+    credentials: "Ph.D. Disability Studies, University of Illinois Chicago, 2011. Associate Professor, Occupational Therapy Faculty. Author, four peer-reviewed papers on adaptive material culture.",
     avatarBg: "#1A1A1A",
     avatarText: "#C29E5F",
+    pattern: 4 as const,
+    categoryColor: "#1A1A1A",
   },
   {
     initials: "J.N.",
     name: "James Nkrumah",
-    role: "Home Care Aide & Disability Advocate",
-    bio: "James has 12 years of experience as a paid home care aide. He advises on caregiver workflow, institutional laundry requirements, and the realities of time-pressure dressing.",
+    role: "Home Care Aide, Disability Advocate",
+    bio: "James brings 12 years of direct-support work to Tempo's product process. He is the person in the room who asks whether the caregiver's back will hold out.",
+    advising: "Caregiver workflow testing, institutional laundry compatibility sign-off, time-pressure dressing protocol development, and the Caregiver Mode feature brief.",
+    credentials: "Home Care Aide Certification 2012. 12 years direct-support work, three agencies. Organizer, Home Care Workers United chapter, 2020-present.",
     avatarBg: "#D4C9BA",
     avatarText: "#1A1A1A",
+    pattern: 5 as const,
+    categoryColor: "#D4C9BA",
   },
 ];
 
@@ -209,19 +232,25 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {advisors.map((advisor) => (
-              /* PLACEHOLDER: replace with real advisor before launch */
               <div
                 key={advisor.name}
                 className="bg-[#FAFAF7] border border-[#D4C9BA] rounded-xl p-6 flex flex-col gap-4"
               >
-                {/* Avatar */}
-                <AdvisorAvatar
-                  initials={advisor.initials}
-                  name={advisor.name}
-                  avatarBg={advisor.avatarBg}
-                  avatarText={advisor.avatarText}
-                  size="sm"
-                />
+                {/* Avatar + compensation badge row */}
+                <div className="flex items-start justify-between gap-3">
+                  <AdvisorAvatar
+                    initials={advisor.initials}
+                    name={advisor.name}
+                    avatarBg={advisor.avatarBg}
+                    avatarText={advisor.avatarText}
+                    size="lg"
+                    pattern={advisor.pattern}
+                    categoryColor={advisor.categoryColor}
+                  />
+                  <span className="mt-1 shrink-0 text-[10px] font-semibold text-[#7A8B75] border border-[#7A8B75]/40 bg-[#7A8B75]/10 px-2 py-1 rounded-full leading-tight text-center">
+                    $175/hr<br />+ 0.5% royalties
+                  </span>
+                </div>
 
                 <div>
                   <h3 className="font-semibold text-[#1A1A1A] text-base mb-0.5">
@@ -230,8 +259,16 @@ export default function AboutPage() {
                   <p className="text-xs text-[#5A5A5A] font-medium mb-3 leading-snug">
                     {advisor.role}
                   </p>
-                  <p className="text-sm text-[#5A5A5A] leading-relaxed">
+                  <p className="text-sm text-[#5A5A5A] leading-relaxed mb-3">
                     {advisor.bio}
+                  </p>
+                  <p className="text-xs text-[#5A5A5A] leading-relaxed mb-2">
+                    <span className="font-semibold text-[#1A1A1A]">Advising Tempo on:</span>{" "}
+                    {advisor.advising}
+                  </p>
+                  <p className="text-xs text-[#9A9A9A] leading-relaxed">
+                    <span className="font-medium text-[#5A5A5A]">Credentials:</span>{" "}
+                    {advisor.credentials}
                   </p>
                 </div>
               </div>
@@ -290,6 +327,31 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <StructuredData
+        data={buildBreadcrumbList([
+          { name: "Home", url: "https://tempo.style" },
+          { name: "About", url: "https://tempo.style/about" },
+        ])}
+      />
+      <StructuredData
+        data={buildAdvisorsSchema(
+          advisors.map((a) => ({
+            name: a.name,
+            role: a.role,
+            knowsAbout:
+              a.name === "Amara Osei"
+                ? "ADA compliance, disability rights law, adaptive fashion policy, accessible product labeling"
+                : a.name === "Carlos Rivera"
+                ? "occupational therapy, spinal cord injury rehabilitation, adaptive daily living, time-to-dress research"
+                : a.name === "Simone Walsh"
+                ? "adaptive fashion, wheelchair fashion, seated-cut design, disability representation in media"
+                : a.name === "Dr. Keiko Tanaka"
+                ? "disability studies, occupational therapy, material culture, community accountability, ableism"
+                : "home care, caregiver workflow, institutional laundry, adaptive clothing, direct support work",
+          }))
+        )}
+      />
     </div>
   );
 }

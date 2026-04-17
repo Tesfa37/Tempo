@@ -213,3 +213,25 @@ export function buildCollectionPageSchema(): object {
     },
   };
 }
+
+export function buildAdvisorsSchema(
+  advisors: Array<{
+    name: string;
+    role: string;
+    knowsAbout: string;
+  }>
+): object[] {
+  return advisors.map((advisor) => ({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: advisor.name,
+    jobTitle: advisor.role,
+    worksFor: {
+      "@type": "Organization",
+      name: "Tempo",
+      url: "https://tempo.style",
+    },
+    knowsAbout: advisor.knowsAbout,
+    url: "https://tempo.style/about#advisors",
+  }));
+}
