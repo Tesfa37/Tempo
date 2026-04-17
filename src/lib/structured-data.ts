@@ -235,3 +235,30 @@ export function buildAdvisorsSchema(
     url: "https://tempo.style/about#advisors",
   }));
 }
+
+export function buildAccessibilityPageSchema(): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://tempo.style/accessibility",
+    name: "Accessibility Statement, Tempo",
+    url: "https://tempo.style/accessibility",
+    description:
+      "Tempo's commitment to WCAG 2.1 AA conformance, accessibility features, known limitations, and how to report accessibility barriers.",
+    accessibilityAPI: ["ARIA"],
+    accessibilityFeature: [
+      "keyboard",
+      "alternativeText",
+      "readingOrder",
+      "highContrast",
+      "structuredNavigation",
+    ],
+    accessibilitySummary:
+      "This site targets WCAG 2.1 AA conformance. All interactive elements are keyboard reachable with visible focus indicators. Images have meaningful alt text. Dynamic updates are announced via ARIA live regions. No auto-playing media. Motion is suppressed when prefers-reduced-motion is set.",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Tempo",
+      url: "https://tempo.style",
+    },
+  };
+}

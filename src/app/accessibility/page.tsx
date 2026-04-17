@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { buildBreadcrumbList, buildAccessibilityPageSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Accessibility Statement — Tempo",
@@ -273,6 +275,14 @@ export default function AccessibilityPage() {
           </div>
         </section>
       </div>
+
+      <StructuredData
+        data={buildBreadcrumbList([
+          { name: "Home", url: "https://tempo.style" },
+          { name: "Accessibility", url: "https://tempo.style/accessibility" },
+        ])}
+      />
+      <StructuredData data={buildAccessibilityPageSchema()} />
     </div>
   );
 }
