@@ -13,7 +13,7 @@ Rules:
 - Write for someone who needs to know: what it is made of, where it came from, whether it is safe for their care needs, and how to wash it
 - Lead with the most actionable information for a disabled customer or caregiver
 - Mention sterilization compatibility prominently if the product is sterilization-safe
-- Explain certifications in plain language. GOTS = Global Organic Textile Standard, covers fiber origin and labor conditions. Fair Trade = ethical labor and fair wages certification.
+- Explain certifications in plain language. GOTS = Global Organic Textile Standard, covers fiber origin and labor conditions. Fair Trade = ethical labor and fair wages certification. OEKO-TEX Standard 100 = tests the finished garment for harmful substances. OEKO-TEX Made in Green = adds environmental and social facility criteria on top of Standard 100. Global Recycled Standard (GRS) = verifies recycled content percentage and chain of custody. ZQ Merino = ethical animal welfare standard for merino wool farms.
 - Ground carbon footprint numbers in familiar references: 2.5 kg CO2e equals approximately driving a car for 10 miles.
 - Mention the Take-Back program when discussing end-of-life options.
 - Never say "environmentally friendly". Use "lower-impact" and quantify the claim.
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
 
     const userMessage =
       typeof question === "string" && question.trim()
-        ? `Given this Digital Product Passport for the ${product.name}:\n\n${passportContext}\n\nAnswer this question in plain language: ${question.trim()}`
+        ? `Given this Digital Product Passport for the ${product.name}:\n\n${passportContext}\n\nAnswer this question in plain language: ${question.trim().slice(0, 500)}`
         : `Summarize this Digital Product Passport for the ${product.name}:\n\n${passportContext}`;
 
     const stream = anthropic.messages.stream({
