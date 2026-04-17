@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Leaf, QrCode, Users, Zap } from "lucide-react";
 import { products } from "@/data/products";
 import { heroImage, productImages } from "@/data/imagery-manifest";
+import { ValidatedByStrip } from "@/components/home/ValidatedByStrip";
 
 // ─── Four Pillars Data ───────────────────────────────────────────────────────
 
@@ -235,6 +236,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Validated By Strip ────────────────────────────────────────────── */}
+      <ValidatedByStrip />
 
       {/* ── Featured Products Row ──────────────────────────────────────────── */}
       <section
