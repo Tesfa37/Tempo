@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { redeemReward } from "@/app/actions/points";
-import { showEarnToast } from "./EarnToast";
 import { toast } from "sonner";
 import type { RedemptionId } from "@/lib/points-catalog";
 
@@ -29,7 +28,10 @@ export function RedeemButton({
     const result = await redeemReward(rewardType, cost);
     setLoading(false);
     if (result.success && result.newTotal !== undefined) {
-      showEarnToast(-cost, `Redeemed: ${label}`);
+      toast(`Redeemed: ${label}`, {
+        description: `${cost.toLocaleString()} points spent. New balance: ${result.newTotal.toLocaleString()}`,
+        duration: 5000,
+      });
       onSuccess(result.newTotal);
     } else {
       toast.error(
