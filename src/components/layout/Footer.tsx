@@ -11,11 +11,14 @@ const footerLinks = {
   Company: [
     { href: "/about", label: "About Tempo" },
     { href: "/about#advisors", label: "Advisory board" },
+    { href: "/governance", label: "Advisor governance" },
     { href: "/accessibility", label: "Accessibility statement" },
   ],
   Resources: [
-    { href: "/passport/TMP-001", label: "Digital Product Passport" },
+    { href: "/passport", label: "Digital Product Passport" },
+    { href: "/financial-support", label: "Financial support" },
     { href: "/accessibility", label: "WCAG 2.1 AA compliance" },
+    { href: "/credits", label: "Image credits" },
   ],
 };
 
