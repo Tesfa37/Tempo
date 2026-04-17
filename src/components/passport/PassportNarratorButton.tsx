@@ -188,6 +188,9 @@ export function PassportNarratorButton({ sku }: PassportNarratorButtonProps) {
           aria-label="Plain-language passport summary"
           aria-live="polite"
         >
+          {streaming && !summary && (
+            <span className="sr-only">Generating summary...</span>
+          )}
           {summary}
           {streaming && (
             <span
