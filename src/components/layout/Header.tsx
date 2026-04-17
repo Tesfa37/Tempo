@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { PointsBadge } from "@/components/points/PointsBadge";
+import { CartIcon } from "@/components/cart/CartIcon";
 
 const SHOW_NEW_BADGE = Date.now() < 1750000000000;
 
@@ -19,7 +20,11 @@ const navLinks = [
   { href: "/accessibility", label: "Accessibility" },
 ];
 
-export function Header() {
+interface HeaderProps {
+  isAuthed?: boolean;
+}
+
+export function Header({ isAuthed = false }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -54,6 +59,22 @@ export function Header() {
               </Link>
             ))}
             <PointsBadge />
+            <CartIcon />
+            {isAuthed ? (
+              <Link
+                href="/account"
+                className="hidden md:inline-flex items-center text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded px-2 py-1"
+              >
+                Account
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden md:inline-flex items-center text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded px-2 py-1"
+              >
+                Sign in
+              </Link>
+            )}
             <Link
               href="/shop"
               className="bg-[#7A8B75] text-[#FAFAF7] text-sm font-medium px-4 py-2 rounded hover:bg-[#6a7a65] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
@@ -98,6 +119,28 @@ export function Header() {
                 </Link>
               </li>
             ))}
+            <li className="mt-2">
+              <CartIcon />
+            </li>
+            <li>
+              {isAuthed ? (
+                <Link
+                  href="/account"
+                  className="inline-flex items-center py-2 text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Account
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="inline-flex items-center py-2 text-sm font-medium text-[#1A1A1A] hover:text-[#C29E5F] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Sign in
+                </Link>
+              )}
+            </li>
             <li>
               <Link
                 href="/shop"
