@@ -4,7 +4,7 @@ create table public.profiles (
   email text,
   display_name text,
   tier text default 'Advocate' check (tier in ('Advocate', 'Advisor', 'Architect')),
-  points integer default 0,
+  points integer default 0 check (points >= 0),
   caregiver_mode boolean default false,
   public_leaderboard boolean default false,
   created_at timestamptz default now()
@@ -24,6 +24,10 @@ create table public.point_events (
 create unique index point_events_scan_dpp_unique
   on public.point_events (user_id, (metadata->>'sku'))
   where event_type = 'scan_dpp';
+
+-- Indexes for common query patterns
+create index point_events_user_id_idx on public.point_events (user_id);
+create index redemptions_user_id_idx on public.redemptions (user_id);
 
 -- Redemptions
 create table public.redemptions (
@@ -49,6 +53,11 @@ create policy "Users read own events"
 create policy "Users read own redemptions"
   on public.redemptions for select using (auth.uid() = user_id);
 
+-- INSERT policies intentionally omitted for point_events and redemptions.
+-- All point mutations go through server actions using createServiceClient()
+-- (SUPABASE_SERVICE_ROLE_KEY), which bypasses RLS entirely. This is safe
+-- because the service role key never reaches the browser.
+
 -- Auto-create profile on signup
 create or replace function public.handle_new_user()
 returns trigger
@@ -73,7 +82,7 @@ create or replace function public.decrement_points_if_sufficient(
   p_amount integer
 ) returns boolean
 language plpgsql
-security definer
+security definer set search_path = ''
 as $$
 declare
   current_points integer;
