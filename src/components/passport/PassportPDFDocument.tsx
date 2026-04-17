@@ -3,14 +3,15 @@ import { Document, Page, View, Text, Image, StyleSheet } from "@react-pdf/render
 import type { DigitalProductPassport } from "@/data/passports";
 
 const CERT_EXPLANATIONS: Record<string, string> = {
-  GOTS: "Global Organic Textile Standard — certifies organic fiber origin and ethical labor conditions throughout the supply chain.",
-  "Fair Trade": "Ethical labor certification — guarantees fair wages and safe working conditions for all workers.",
-  "OEKO-TEX": "Tests for harmful substances — no chemicals that could harm wearers or the environment.",
+  GOTS: "Global Organic Textile Standard, certifies organic fiber origin and ethical labor conditions throughout the supply chain.",
+  "Fair Trade": "Ethical labor certification, guarantees fair wages and safe working conditions for all workers.",
+  "OEKO-TEX": "Tests for harmful substances, no chemicals that could harm wearers or the environment.",
   bluesign: "Sustainable chemical and water use in the manufacturing process.",
 };
 
 function co2Miles(kg: number): string {
   const miles = Math.round((kg / 2.5) * 10);
+  if (miles === 0) return "< 1 mile driving equivalent";
   return `approx. ${miles} miles driving`;
 }
 
@@ -51,8 +52,8 @@ const s = StyleSheet.create({
     paddingVertical: 3,
     borderRadius: 4,
   },
-  topRow: { flexDirection: "row", gap: 16, marginBottom: 18 },
-  identityBlock: { flex: 1 },
+  topRow: { flexDirection: "row", marginBottom: 18 },
+  identityBlock: { flex: 1, marginRight: 16 },
   productName: {
     fontSize: 20,
     fontFamily: "Helvetica-Bold",
@@ -222,7 +223,7 @@ export function PassportPDFDocument({ passport, qrDataUri }: Props) {
             <Text style={s.meta}>Version: v{passport.passportVersion}</Text>
           </View>
           <View style={s.qrBlock}>
-            <Image src={qrDataUri} style={{ width: 88, height: 88 }} alt={`QR code linking to tempo.style/passport/${passport.sku}`} />
+            <Image src={qrDataUri} style={{ width: 88, height: 88 }} />
             <Text style={s.qrCaption}>tempo.style/passport/{passport.sku}</Text>
           </View>
         </View>
@@ -257,8 +258,7 @@ export function PassportPDFDocument({ passport, qrDataUri }: Props) {
                 <Text style={s.certName}>{cert.name}</Text>
                 <Text style={s.certDetail}>{explanation}</Text>
                 <Text style={[s.certDetail, { marginTop: 2 }]}>
-                  Certificate: {cert.certificateNumber} — Valid until:{" "}
-                  {formatDate(cert.validUntil)}
+                  Certificate: {cert.certificateNumber}, valid until {formatDate(cert.validUntil)}
                 </Text>
               </View>
             );
@@ -298,7 +298,7 @@ export function PassportPDFDocument({ passport, qrDataUri }: Props) {
         </View>
 
         <View style={s.sectionBox}>
-          <Text style={s.sectionTitle}>Care and Sterilization</Text>
+          <Text style={s.sectionTitle}>Care & Sterilization</Text>
           {passport.careInstructions.map((instr, i) => (
             <Text key={i} style={s.bullet}>
               • {instr}
