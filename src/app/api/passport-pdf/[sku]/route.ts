@@ -36,6 +36,7 @@ export async function GET(
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="tempo-passport-${sku}.pdf"`,
         "Cache-Control": "no-store",
+        "Content-Length": buffer.byteLength.toString(),
       },
     });
   } catch {
