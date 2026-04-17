@@ -3,6 +3,7 @@ import { passports } from "@/data/passports";
 import type { Metadata } from "next";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { buildCollectionPageSchema } from "@/lib/structured-data";
+import { InstallPrompt } from "@/components/pwa/InstallPrompt";
 
 export const metadata: Metadata = {
   title: "Digital Product Passports | Tempo",
@@ -17,6 +18,7 @@ export default function PassportIndexPage() {
   const passportList = Object.values(passports);
 
   return (
+    <>
     <main className="bg-[#E8DFD2] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="font-playfair text-4xl font-bold text-[#1A1A1A] mb-4">
@@ -93,5 +95,7 @@ export default function PassportIndexPage() {
         <StructuredData data={buildCollectionPageSchema()} />
       </div>
     </main>
+    <InstallPrompt />
+    </>
   );
 }

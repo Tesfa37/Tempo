@@ -1,0 +1,51 @@
+{
+  "name": "Tempo Adaptive Fashion",
+  "short_name": "Tempo",
+  "description": "Adaptive fashion built with disabled advisors. View Digital Product Passports offline.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#C29E5F",
+  "background_color": "#E8DFD2",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop the collection",
+      "short_name": "Shop",
+      "url": "/shop",
+      "description": "Browse adaptive clothing"
+    },
+    {
+      "name": "Digital Product Passports",
+      "short_name": "Passports",
+      "url": "/passport",
+      "description": "View garment transparency passports"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import { VoiceLayer } from "@/components/voice/VoiceLayer";
 import { GuestPointsTracker } from "@/components/points/GuestPointsTracker";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { buildOrganization } from "@/lib/structured-data";
+import { PwaInit } from "@/components/pwa/PwaInit";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -24,6 +25,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tempo.style"),
+  manifest: "/manifest.json",
   title: "Tempo, Clothes that move at your pace",
   description:
     "Tempo is a sustainable adaptive fashion brand. Adaptive-first design, GOTS-certified materials, Digital Product Passports, and a Caregiver-First shopping experience.",
@@ -49,6 +51,14 @@ export const metadata: Metadata = {
       "Adaptive fashion built with disabled advisors. Sustainable materials, Digital Product Passports, Caregiver Mode.",
     images: ["/opengraph-image"],
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Tempo",
+  },
+  icons: {
+    apple: "/icons/icon-192x192.png",
+  },
 };
 
 export default async function RootLayout({
@@ -68,6 +78,7 @@ export default async function RootLayout({
         <Header isAuthed={!!user} />
         <main>{children}</main>
         <Footer />
+        <PwaInit />
         <VoiceLayer />
         <Toaster position="bottom-right" richColors={false} />
         <GuestPointsTracker />
