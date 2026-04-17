@@ -7,10 +7,24 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
+const SYSTEM_PROMPT = `You translate Digital Product Passport data into plain-language summaries for Tempo customers.
+
+Rules:
+- Write for someone who needs to know: what it is made of, where it came from, whether it is safe for their care needs, and how to wash it
+- Lead with the most actionable information for a disabled customer or caregiver
+- Mention sterilization compatibility prominently if the product is sterilization-safe
+- Explain certifications in plain language. GOTS = Global Organic Textile Standard, covers fiber origin and labor conditions. Fair Trade = ethical labor and fair wages certification.
+- Ground carbon footprint numbers in familiar references: 2.5 kg CO2e equals approximately driving a car for 10 miles.
+- Mention the Take-Back program when discussing end-of-life options.
+- Never say "environmentally friendly". Use "lower-impact" and quantify the claim.
+- Keep summaries under 200 words
+- Use plain language with no jargon unless immediately explained
+- Do not start with "This garment" when summarizing, vary your opening`;
+
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as { sku?: string };
-    const { sku } = body;
+    const body = (await request.json()) as { sku?: unknown; question?: unknown };
+    const { sku, question } = body;
 
     if (!sku || typeof sku !== "string") {
       return new Response(JSON.stringify({ error: "SKU is required" }), {
@@ -47,38 +61,48 @@ export async function POST(request: NextRequest) {
         sterilizationProtocol: passport.sterilizationProtocol,
         recyclabilityScore: passport.recyclabilityScore,
         endOfLifeInstructions: passport.endOfLifeInstructions,
+        takeBackProgram: passport.takeBackProgram,
       },
       null,
       2
     );
 
-    const message = await anthropic.messages.create({
-      model: "claude-sonnet-4-5",
-      max_tokens: 350,
-      system: `You translate Digital Product Passport data into plain-language summaries for Tempo customers.
+    const userMessage =
+      typeof question === "string" && question.trim()
+        ? `Given this Digital Product Passport for the ${product.name}:\n\n${passportContext}\n\nAnswer this question in plain language: ${question.trim()}`
+        : `Summarize this Digital Product Passport for the ${product.name}:\n\n${passportContext}`;
 
-      Rules:
-      - Write for someone who needs to know: what it's made of, where it came from, whether it's safe for their care needs, and how to wash it
-      - Lead with the most actionable information for a disabled customer or caregiver
-      - Mention sterilization compatibility prominently if the product is sterilization-safe
-      - Mention certifications by name (GOTS, Fair Trade) — but explain what they mean briefly
-      - Keep it under 150 words
-      - Use plain language — no jargon unless immediately explained
-      - Do not start with "This garment" — vary your opening`,
-      messages: [
-        {
-          role: "user",
-          content: `Summarize this Digital Product Passport for the ${product.name}:\n\n${passportContext}`,
-        },
-      ],
+    const stream = anthropic.messages.stream({
+      model: "claude-sonnet-4-5",
+      max_tokens: 500,
+      system: SYSTEM_PROMPT,
+      messages: [{ role: "user", content: userMessage }],
     });
 
-    const content = message.content[0] ?? null;
-    const summary =
-      content?.type === "text" ? content.text : "Summary unavailable.";
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const event of stream) {
+            if (
+              event.type === "content_block_delta" &&
+              event.delta.type === "text_delta"
+            ) {
+              controller.enqueue(new TextEncoder().encode(event.delta.text));
+            }
+          }
+          controller.close();
+        } catch (error) {
+          controller.error(error);
+        }
+      },
+    });
 
-    return new Response(JSON.stringify({ summary }), {
-      headers: { "Content-Type": "application/json" },
+    return new Response(readable, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Cache-Control": "no-cache",
+      },
     });
   } catch {
     return new Response(
