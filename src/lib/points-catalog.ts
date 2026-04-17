@@ -59,7 +59,7 @@ export type RedemptionId = typeof REDEMPTIONS[number]["id"];
 
 export interface PointEvent {
   id: string;
-  event_type: string;
+  event_type: string; // intentionally string: DB rows may contain future event types not yet in PointsEventType
   points: number;
   metadata: Record<string, unknown> | null;
   created_at: string;
@@ -67,7 +67,7 @@ export interface PointEvent {
 
 export interface Redemption {
   id: string;
-  reward_type: string;
+  reward_type: string; // intentionally string: mirrors DB column, may contain future reward types
   points_spent: number;
   fulfilled: boolean;
   created_at: string;

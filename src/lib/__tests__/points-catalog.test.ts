@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { calcTier } from "../points-catalog";
+import { calcTier, TIERS } from "../points-catalog";
 
 describe("calcTier", () => {
   it("returns Advocate for 0 points", () => {
@@ -22,5 +22,14 @@ describe("calcTier", () => {
   });
   it("returns Architect for very large numbers", () => {
     expect(calcTier(999999)).toBe("Architect");
+  });
+});
+
+describe("calcTier aligns with TIERS constants", () => {
+  it("returns Advisor at TIERS.Advisor.min", () => {
+    expect(calcTier(TIERS.Advisor.min)).toBe("Advisor");
+  });
+  it("returns Architect at TIERS.Architect.min", () => {
+    expect(calcTier(TIERS.Architect.min)).toBe("Architect");
   });
 });
