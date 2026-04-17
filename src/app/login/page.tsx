@@ -1,4 +1,3 @@
-// src/app/login/page.tsx
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { LoginForm } from "@/components/auth/LoginForm";
@@ -14,27 +13,19 @@ export default async function LoginPage({
 }: {
   searchParams: Promise<{ next?: string }>;
 }) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  // Already signed in -- go to account (or the requested next page)
-  if (user) {
-    const { next } = await searchParams;
-    const destination =
-      next && next.startsWith("/") && !next.startsWith("//")
-        ? next
-        : "/account";
-    redirect(destination);
-  }
-
   const { next } = await searchParams;
   const safeNext =
-    next && next.startsWith("/") && !next.startsWith("//")
-      ? next
-      : "/account";
+    next && next.startsWith("/") && !next.startsWith("//") ? next : "/account";
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) redirect(safeNext);
 
   return (
-    <div className="min-h-screen bg-[#E8DFD2] flex items-center justify-center px-4 py-16">
+    <main className="min-h-screen bg-[#E8DFD2] flex items-center justify-center px-4 py-16">
       <div className="max-w-md w-full">
         <div className="bg-[#FAFAF7] border border-[#D4C9BA] rounded-2xl overflow-hidden">
           <div className="bg-[#1A1A1A] px-8 py-8 text-center">
@@ -50,6 +41,6 @@ export default async function LoginPage({
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

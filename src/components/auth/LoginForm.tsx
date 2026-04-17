@@ -1,7 +1,6 @@
-// src/components/auth/LoginForm.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export function LoginForm({ next }: { next: string }) {
@@ -9,6 +8,12 @@ export function LoginForm({ next }: { next: string }) {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const confirmationRef = useRef<HTMLDivElement>(null);
+
+  // Move focus to confirmation message when sent state activates
+  useEffect(() => {
+    if (sent) confirmationRef.current?.focus();
+  }, [sent]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,7 +37,13 @@ export function LoginForm({ next }: { next: string }) {
 
   if (sent) {
     return (
-      <div className="text-center py-4">
+      <div
+        ref={confirmationRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        className="text-center py-4 outline-none"
+      >
         <p className="font-playfair text-xl font-bold text-[#1A1A1A] mb-3">
           Check your email
         </p>
@@ -57,18 +68,19 @@ export function LoginForm({ next }: { next: string }) {
         <input
           id="login-email"
           type="email"
+          autoComplete="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
           className="w-full px-4 py-3 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-sm text-[#1A1A1A] placeholder-[#9A9A9A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
           aria-describedby={error ? "login-error" : undefined}
-          aria-required="true"
         />
       </div>
       <button
         type="submit"
         disabled={loading}
+        aria-busy={loading}
         className="py-3 px-6 rounded-lg bg-[#C29E5F] text-white font-medium text-sm hover:bg-[#a8874f] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "Sending link..." : "Send magic link"}
