@@ -3,6 +3,8 @@ import { passports } from "@/data/passports";
 import { PassportNarratorButton } from "@/components/passport/PassportNarratorButton";
 import { PassportQR } from "@/components/passport/PassportQR";
 import { DppScanTracker } from "@/components/points/DppScanTracker";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { buildPassportSchema, buildBreadcrumbList } from "@/lib/structured-data";
 
 export async function generateStaticParams() {
   const { passports } = await import("@/data/passports");
@@ -557,6 +559,14 @@ export default async function PassportPage({
         </div>
       </div>
       <DppScanTracker sku={passport.sku} productName={passport.productName} />
+      <StructuredData
+        data={buildBreadcrumbList([
+          { name: "Home", url: "https://tempo.style" },
+          { name: "Passports", url: "https://tempo.style/passport" },
+          { name: passport.sku, url: `https://tempo.style/passport/${passport.sku}` },
+        ])}
+      />
+      <StructuredData data={buildPassportSchema(passport)} />
     </div>
   );
 }

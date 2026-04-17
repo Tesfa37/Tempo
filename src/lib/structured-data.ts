@@ -1,3 +1,5 @@
+import type { DigitalProductPassport } from "@/data/passports";
+
 export function buildOrganization(): object {
   return {
     "@context": "https://schema.org",
@@ -122,5 +124,92 @@ export function buildProductSchema(product: Product): object {
           "I recommend these to every post-stroke client I see now. The magnetic closure opens reliably with one hand.",
       },
     ],
+  };
+}
+
+export function buildPassportSchema(passport: DigitalProductPassport): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": ["Product", "DigitalDocument"],
+    "@id": `https://tempo.style/passport/${passport.sku}`,
+    name: passport.productName,
+    sku: passport.sku,
+    gtin14: passport.gtin,
+    url: `https://tempo.style/passport/${passport.sku}`,
+    brand: {
+      "@type": "Brand",
+      name: "Tempo",
+    },
+    material: passport.materialComposition
+      .map((m) => `${m.percentage}% ${m.fiber}${m.certified && m.certificationBody ? ` (${m.certificationBody})` : ""}`)
+      .join(", "),
+    additionalProperty: [
+      ...passport.materialComposition.map((m) => ({
+        "@type": "PropertyValue",
+        name: `Material: ${m.fiber}`,
+        value: `${m.percentage}%${m.certified && m.certificationBody ? `, certified by ${m.certificationBody}` : ""}`,
+      })),
+      {
+        "@type": "PropertyValue",
+        name: "Recycled Content",
+        value: `${passport.recycledContent}%`,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Country of Origin",
+        value: passport.countryOfOrigin,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Carbon Footprint (kg CO2e)",
+        value: `${passport.carbonFootprint.total}`,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Recyclability Score",
+        value: `${passport.recyclabilityScore}/100`,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Passport Version",
+        value: passport.passportVersion,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "GS1 Digital Link",
+        value: passport.gs1DigitalLinkUrl,
+      },
+    ],
+    hasCertification: passport.certifications.map((cert) => ({
+      "@type": "Certification",
+      name: cert.name,
+      certificationIdentification: cert.certificateNumber,
+      issuedBy: {
+        "@type": "Organization",
+        name: cert.certificationBody,
+      },
+      validFrom: passport.issueDate,
+      validThrough: cert.validUntil,
+    })),
+    dateCreated: passport.issueDate,
+    dateModified: passport.lastUpdated,
+  };
+}
+
+export function buildCollectionPageSchema(): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Digital Product Passports",
+    description:
+      "ESPR-aligned digital product passports for every Tempo garment. Material composition, certifications, carbon footprint, and care instructions.",
+    url: "https://tempo.style/passport",
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://tempo.style" },
+        { "@type": "ListItem", position: 2, name: "Passports", item: "https://tempo.style/passport" },
+      ],
+    },
   };
 }
