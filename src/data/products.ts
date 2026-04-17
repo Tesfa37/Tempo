@@ -154,6 +154,7 @@ export const products: Product[] = [
     images: [
       "/images/products/tmp-002-1.jpg",
       "/images/products/tmp-002-2.jpg",
+      "/images/products/tmp-002-3.jpg",
     ],
     isFeatured: false,
     isNew: true,
@@ -205,6 +206,7 @@ export const products: Product[] = [
     images: [
       "/images/products/tmp-003-1.jpg",
       "/images/products/tmp-003-2.jpg",
+      "/images/products/tmp-003-3.jpg",
     ],
     isFeatured: false,
     isNew: false,
@@ -259,6 +261,7 @@ export const products: Product[] = [
     images: [
       "/images/products/tmp-004-1.jpg",
       "/images/products/tmp-004-2.jpg",
+      "/images/products/tmp-004-3.jpg",
     ],
     isFeatured: false,
     isNew: false,
@@ -319,6 +322,7 @@ export const products: Product[] = [
     images: [
       "/images/products/tmp-005-1.jpg",
       "/images/products/tmp-005-2.jpg",
+      "/images/products/tmp-005-3.jpg",
     ],
     isFeatured: false,
     isNew: true,
@@ -372,6 +376,7 @@ export const products: Product[] = [
     images: [
       "/images/products/tmp-006-1.jpg",
       "/images/products/tmp-006-2.jpg",
+      "/images/products/tmp-006-3.jpg",
     ],
     isFeatured: false,
     isNew: false,
