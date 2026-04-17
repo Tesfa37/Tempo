@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Leaf, QrCode, Users, Zap } from "lucide-react";
 import { products } from "@/data/products";
+import { heroImage, productImages } from "@/data/imagery-manifest";
 
 // ─── Four Pillars Data ───────────────────────────────────────────────────────
 
@@ -28,17 +30,6 @@ const pillars = [
     title: "Caregiver-First UX",
     body: "Toggle Caregiver Mode. Time-to-dress estimates, sterilization labels, condition filters — your workflow, respected.",
   },
-];
-
-// ─── Gradient palette per product index ─────────────────────────────────────
-
-const gradients = [
-  "from-[#C29E5F] to-[#E8DFD2]",
-  "from-[#7A8B75] to-[#E8DFD2]",
-  "from-[#C4725A] to-[#E8DFD2]",
-  "from-[#D4C9BA] to-[#FAFAF7]",
-  "from-[#C29E5F] to-[#7A8B75]",
-  "from-[#1A1A1A] to-[#5A5A5A]",
 ];
 
 // ─── Newsletter Section (client-only interactive part) ───────────────────────
@@ -161,32 +152,46 @@ export default function LandingPage() {
         className="bg-[#E8DFD2] py-24 px-4 sm:px-6 lg:px-8"
         aria-labelledby="hero-heading"
       >
-        <div className="max-w-4xl mx-auto">
-          <h1
-            id="hero-heading"
-            className="font-playfair text-5xl sm:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-tight mb-6"
-          >
-            Clothes that move<br className="hidden sm:block" /> at your pace.
-          </h1>
-          <p className="text-[#5A5A5A] text-lg sm:text-xl max-w-2xl mb-10 leading-relaxed">
-            Every morning, for 90 hours a year, a pair of ordinary pants stood
-            between dignity and independence. Tempo was built to give those
-            minutes back. Adaptive design, sustainable materials, every garment
-            a product you can trust completely.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 items-start">
-            <Link
-              href="/shop"
-              className="inline-block bg-[#7A8B75] text-white font-medium px-8 py-4 rounded-lg hover:bg-[#6a7a65] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] text-base"
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1
+              id="hero-heading"
+              className="font-playfair text-5xl sm:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-tight mb-6"
             >
-              Shop the collection
-            </Link>
-            <Link
-              href="/about"
-              className="inline-block text-[#C29E5F] font-medium px-2 py-4 underline underline-offset-4 hover:text-[#a8874f] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded text-base"
-            >
-              Learn about our mission
-            </Link>
+              Clothes that move<br className="hidden sm:block" /> at your pace.
+            </h1>
+            <p className="text-[#5A5A5A] text-lg sm:text-xl max-w-2xl mb-10 leading-relaxed">
+              Every morning, for 90 hours a year, a pair of ordinary pants stood
+              between dignity and independence. Tempo was built to give those
+              minutes back. Adaptive design, sustainable materials, every garment
+              a product you can trust completely.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
+              <Link
+                href="/shop"
+                className="inline-block bg-[#7A8B75] text-white font-medium px-8 py-4 rounded-lg hover:bg-[#6a7a65] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] text-base"
+              >
+                Shop the collection
+              </Link>
+              <Link
+                href="/about"
+                className="inline-block text-[#C29E5F] font-medium px-2 py-4 underline underline-offset-4 hover:text-[#a8874f] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded text-base"
+              >
+                Learn about our mission
+              </Link>
+            </div>
+          </div>
+          <div className="relative h-80 lg:h-[520px] rounded-2xl overflow-hidden">
+            <Image
+              src={heroImage.path}
+              alt={heroImage.alt}
+              fill
+              className="object-cover"
+              placeholder="blur"
+              blurDataURL={heroImage.blurDataURL}
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
       </section>
@@ -244,7 +249,7 @@ export default function LandingPage() {
             The collection
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product, index) => (
+            {products.map((product) => (
               <article
                 key={product.id}
                 className={`bg-[#FAFAF7] rounded-xl overflow-hidden border transition-shadow hover:shadow-md ${
@@ -253,13 +258,27 @@ export default function LandingPage() {
                     : "border-[#D4C9BA]"
                 }`}
               >
-                {/* Placeholder image */}
-                <div
-                  className={`h-48 bg-gradient-to-br ${gradients[index % gradients.length]} flex items-center justify-center`}
-                  aria-hidden="true"
-                >
+                {/* Product image */}
+                <div className="relative h-48 overflow-hidden">
+                  {(() => {
+                    const src = product.images[0];
+                    const meta = src ? productImages[src] : undefined;
+                    return src && meta ? (
+                      <Image
+                        src={src}
+                        alt={meta.alt}
+                        fill
+                        className="object-cover"
+                        placeholder="blur"
+                        blurDataURL={meta.blurDataURL}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="h-full bg-[#E8DFD2]" aria-hidden="true" />
+                    );
+                  })()}
                   {product.isFeatured && (
-                    <span className="bg-[#C29E5F] text-white text-xs font-medium px-3 py-1 rounded-full">
+                    <span className="absolute top-3 left-3 bg-[#C29E5F] text-white text-xs font-medium px-3 py-1 rounded-full z-10">
                       Featured
                     </span>
                   )}
