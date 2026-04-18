@@ -107,6 +107,9 @@
   --foreground: oklch(0.145 0 0);
 }
 
+/* Dark mode shadcn token overrides. Note: brand --accent (#8B6F47) and --border (#E8E4DC)
+   set in :root are re-overridden here by shadcn defaults. Dark-mode brand variants are
+   deferred to a future task. */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
