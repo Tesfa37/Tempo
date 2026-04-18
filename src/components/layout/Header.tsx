@@ -18,7 +18,7 @@ const PRIMARY_NAV: NavLink[] = [
   { href: "/shop?gender=women", label: "Women", matchGender: "women" },
   { href: "/shop?gender=men", label: "Men", matchGender: "men" },
   { href: "/shop?gender=adaptive", label: "Adaptive", matchGender: "adaptive" },
-  { href: "/try-on", label: "Virtual Fitting" },
+  { href: "/fit", label: "Virtual Fitting" },
   {
     href: "/passport",
     label: "Passports",

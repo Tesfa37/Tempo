@@ -125,7 +125,7 @@ export function parseVoiceCommand(transcript: string): CommandIntent {
   if (/\b(try on|try)\b/.test(text)) {
     const product = matchProduct(text);
     if (product) {
-      return { type: "navigate", href: `/try-on/${product.slug}`, description: `AR try-on for ${product.name}` };
+      return { type: "navigate", href: `/fit/${product.slug}`, description: `AI Virtual Fitting for ${product.name}` };
     }
   }
 

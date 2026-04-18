@@ -229,7 +229,7 @@ export default function LandingPage() {
               positions. Your images never leave your device.
             </p>
             <Link
-              href="/try-on"
+              href="/fit"
               className="inline-block bg-[var(--accent)] hover:bg-[var(--accent-hover)] tempo-transition text-white font-medium px-6 py-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] text-sm"
             >
               Try Virtual Fitting

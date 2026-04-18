@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/governance`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE}/accessibility`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.4 },
     { url: `${BASE}/credits`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${BASE}/fit`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE}/try-on`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const productRoutes: MetadataRoute.Sitemap = products.map((p) => ({

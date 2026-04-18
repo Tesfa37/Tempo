@@ -284,12 +284,12 @@ export default async function ProductDetailPage({
 
             {/* AR Try-On CTA */}
             <Link
-              href={`/try-on/${product.slug}`}
-              aria-label={`Try on ${product.name} in augmented reality`}
+              href={`/fit/${product.slug}`}
+              aria-label={`Try ${product.name} with AI Virtual Fitting`}
               className="inline-flex items-center justify-center gap-2 w-full border border-[#C29E5F] text-[#C29E5F] text-sm font-medium px-4 py-2.5 rounded hover:bg-[#C29E5F]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
             >
               <Camera className="h-4 w-4 shrink-0" aria-hidden="true" />
-              Try it on in AR
+              Try it on with Virtual Fitting
             </Link>
 
             {/* Fit Concierge */}
