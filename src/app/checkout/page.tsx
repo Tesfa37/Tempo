@@ -91,7 +91,7 @@ function Field({
 }
 
 const inputCls =
-  "w-full px-4 py-3 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-[#1A1A1A] text-sm placeholder-[#9A9A9A] focus:outline-none focus:ring-2 focus:ring-[#C29E5F] focus:border-transparent transition-shadow";
+  "w-full px-4 py-3 rounded-lg border border-[#D4C9BA] bg-[#FAFAF7] text-[#1A1A1A] text-sm placeholder-[#9A9A9A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] focus-visible:border-transparent tempo-transition";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -216,7 +216,7 @@ export default function CheckoutPage() {
         <div className="mb-8">
           <Link
             href="/cart"
-            className="text-sm text-[#7A8B75] underline underline-offset-2 hover:text-[#5a6b55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+            className="text-sm text-[#7A8B75] underline underline-offset-2 hover:text-[#5a6b55] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
           >
             Back to cart
           </Link>
@@ -468,7 +468,7 @@ export default function CheckoutPage() {
                   type="checkbox"
                   checked={form.isGift}
                   onChange={handleChange}
-                  className="w-4 h-4 rounded border-[#D4C9BA] text-[#C29E5F] focus:ring-[#C29E5F] cursor-pointer"
+                  className="w-4 h-4 rounded border-[#D4C9BA] text-[#C29E5F] focus-visible:ring-2 focus-visible:ring-[#C29E5F] cursor-pointer"
                 />
                 <span className="text-sm font-medium text-[#1A1A1A]">
                   This is a gift
@@ -497,7 +497,7 @@ export default function CheckoutPage() {
                   type="checkbox"
                   checked={form.billSeparately}
                   onChange={handleChange}
-                  className="w-4 h-4 rounded border-[#D4C9BA] text-[#C29E5F] focus:ring-[#C29E5F] cursor-pointer"
+                  className="w-4 h-4 rounded border-[#D4C9BA] text-[#C29E5F] focus-visible:ring-2 focus-visible:ring-[#C29E5F] cursor-pointer"
                 />
                 <span className="text-sm font-medium text-[#1A1A1A]">
                   Bill me, ship to care recipient at a different address
@@ -599,7 +599,7 @@ export default function CheckoutPage() {
                   type="checkbox"
                   checked={form.facilityInvoice}
                   onChange={handleChange}
-                  className="w-4 h-4 rounded border-[#D4C9BA] text-[#C29E5F] focus:ring-[#C29E5F] cursor-pointer"
+                  className="w-4 h-4 rounded border-[#D4C9BA] text-[#C29E5F] focus-visible:ring-2 focus-visible:ring-[#C29E5F] cursor-pointer"
                 />
                 <span className="text-sm font-medium text-[#1A1A1A]">
                   Invoice for a care facility (net-30)
@@ -660,7 +660,7 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] text-[#FAFAF7] font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-[#2A2A2A] disabled:bg-[#D4C9BA] disabled:cursor-not-allowed transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+              className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] text-[#FAFAF7] font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-[#2A2A2A] disabled:bg-[#D4C9BA] disabled:cursor-not-allowed tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
             >
               {loading ? (
                 "Redirecting to Stripe..."

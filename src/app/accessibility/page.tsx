@@ -238,7 +238,7 @@ export default function AccessibilityPage() {
                 </span>
                 <a
                   href="mailto:accessibility@tempo.style"
-                  className="text-sm text-[#C29E5F] underline underline-offset-2 hover:text-[#a8874f] focus-visible:outline-2 focus-visible:outline-[#C29E5F] rounded"
+                  className="text-sm text-[#C29E5F] underline underline-offset-2 hover:text-[#a8874f] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
                 >
                   accessibility@tempo.style
                 </a>
@@ -267,7 +267,7 @@ export default function AccessibilityPage() {
                 href="https://www.w3.org/TR/WCAG21/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C29E5F] underline underline-offset-2 break-all hover:text-[#a8874f] focus-visible:outline-2 focus-visible:outline-[#C29E5F] rounded"
+                className="text-[#C29E5F] underline underline-offset-2 break-all hover:text-[#a8874f] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
               >
                 https://www.w3.org/TR/WCAG21/
               </a>

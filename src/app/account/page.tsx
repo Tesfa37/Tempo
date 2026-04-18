@@ -12,11 +12,13 @@ export default async function AccountPage() {
   if (!profile) redirect("/login?next=/account");
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="font-playfair text-3xl font-bold text-[#1A1A1A] mb-8">
-        Your profile
-      </h1>
-      <AccountPageClient profile={profile} />
+    <div className="min-h-screen bg-[var(--bg-canvas)] py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="font-playfair text-3xl font-bold text-[#1A1A1A] mb-8">
+          Your profile
+        </h1>
+        <AccountPageClient profile={profile} />
+      </div>
     </div>
   );
 }

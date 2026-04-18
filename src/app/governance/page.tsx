@@ -61,7 +61,7 @@ export default function GovernancePage() {
             <li>
               <Link
                 href="/"
-                className="hover:text-[#1A1A1A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                className="hover:text-[#1A1A1A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
               >
                 Home
               </Link>
@@ -70,7 +70,7 @@ export default function GovernancePage() {
             <li>
               <Link
                 href="/about"
-                className="hover:text-[#1A1A1A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                className="hover:text-[#1A1A1A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
               >
                 About
               </Link>
@@ -303,7 +303,7 @@ export default function GovernancePage() {
         <div className="mt-10 pt-8 border-t border-[#D4C9BA]">
           <Link
             href="/about"
-            className="text-sm font-medium text-[#7A8B75] underline underline-offset-4 hover:text-[#5a6b55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+            className="text-sm font-medium text-[#7A8B75] underline underline-offset-4 hover:text-[#5a6b55] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
           >
             Back to About Tempo
           </Link>

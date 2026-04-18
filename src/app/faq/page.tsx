@@ -61,7 +61,7 @@ export default function FAQPage() {
               <li>
                 <Link
                   href="/"
-                  className="hover:text-[#1A1A1A] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                  className="hover:text-[#1A1A1A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
                 >
                   Home
                 </Link>
@@ -91,7 +91,7 @@ export default function FAQPage() {
                 <li key={cat.id}>
                   <a
                     href={`#cat-${cat.id}`}
-                    className="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-[#D4C9BA] bg-[#FAFAF7] text-[#5A5A5A] hover:bg-[#F0EBE3] hover:text-[#1A1A1A] motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+                    className="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-[#D4C9BA] bg-[#FAFAF7] text-[#5A5A5A] hover:bg-[#F0EBE3] hover:text-[#1A1A1A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
                   >
                     {cat.label}
                   </a>

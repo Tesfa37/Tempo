@@ -44,7 +44,7 @@ export default function CartPage() {
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 bg-[#7A8B75] text-white font-medium px-6 py-3 rounded-lg hover:bg-[#6a7a65] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+            className="inline-flex items-center gap-2 bg-[var(--accent)] text-white font-medium px-6 py-3 rounded hover:bg-[var(--accent-hover)] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
           >
             Browse the collection
             <ArrowRight size={16} aria-hidden="true" />
@@ -103,7 +103,7 @@ export default function CartPage() {
                         <div>
                           <Link
                             href={`/shop/${item.slug}`}
-                            className="font-semibold text-[#1A1A1A] hover:text-[#C29E5F] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded text-sm leading-snug"
+                            className="font-semibold text-[#1A1A1A] hover:text-[#C29E5F] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded text-sm leading-snug"
                           >
                             {item.name}
                           </Link>
@@ -133,7 +133,7 @@ export default function CartPage() {
                                 item.quantity - 1
                               )
                             }
-                            className="px-3 py-1.5 text-[#5A5A5A] hover:bg-[#E8DFD2] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#C29E5F]"
+                            className="px-3 py-1.5 text-[#5A5A5A] hover:bg-[#E8DFD2] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#C29E5F]"
                           >
                             <Minus size={12} aria-hidden="true" />
                           </button>
@@ -154,7 +154,7 @@ export default function CartPage() {
                                 item.quantity + 1
                               )
                             }
-                            className="px-3 py-1.5 text-[#5A5A5A] hover:bg-[#E8DFD2] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#C29E5F]"
+                            className="px-3 py-1.5 text-[#5A5A5A] hover:bg-[#E8DFD2] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#C29E5F]"
                           >
                             <Plus size={12} aria-hidden="true" />
                           </button>
@@ -170,7 +170,7 @@ export default function CartPage() {
                           onClick={() =>
                             removeItem(item.productId, item.size)
                           }
-                          className="ml-auto text-[#9A9A9A] hover:text-[#C4372A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded p-1"
+                          className="ml-auto text-[#9A9A9A] hover:text-[#C4372A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded p-1"
                         >
                           <Trash2 size={14} aria-hidden="true" />
                         </button>
@@ -183,7 +183,7 @@ export default function CartPage() {
 
             <Link
               href="/shop"
-              className="text-sm text-[#7A8B75] underline underline-offset-2 hover:text-[#5a6b55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded self-start"
+              className="text-sm text-[#7A8B75] underline underline-offset-2 hover:text-[#5a6b55] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded self-start"
             >
               Continue shopping
             </Link>
@@ -235,7 +235,7 @@ export default function CartPage() {
 
               <Link
                 href="/checkout"
-                className="mt-5 flex items-center justify-center gap-2 w-full bg-[#1A1A1A] text-[#FAFAF7] font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-[#2A2A2A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+                className="mt-5 flex items-center justify-center gap-2 w-full bg-[#1A1A1A] text-[#FAFAF7] font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-[#2A2A2A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
               >
                 Proceed to checkout
                 <ArrowRight size={16} aria-hidden="true" />

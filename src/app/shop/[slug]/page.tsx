@@ -153,7 +153,7 @@ export default async function ProductDetailPage({
           <li>
             <Link
               href="/"
-              className="hover:text-[#1A1A1A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+              className="hover:text-[#1A1A1A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
             >
               Home
             </Link>
@@ -162,7 +162,7 @@ export default async function ProductDetailPage({
           <li>
             <Link
               href="/shop"
-              className="hover:text-[#1A1A1A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+              className="hover:text-[#1A1A1A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
             >
               Shop
             </Link>
@@ -286,7 +286,7 @@ export default async function ProductDetailPage({
             <Link
               href={`/fit/${product.slug}`}
               aria-label={`Try ${product.name} with AI Virtual Fitting`}
-              className="inline-flex items-center justify-center gap-2 w-full border border-[#C29E5F] text-[#C29E5F] text-sm font-medium px-4 py-2.5 rounded hover:bg-[#C29E5F]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+              className="inline-flex items-center justify-center gap-2 w-full border border-[#C29E5F] text-[#C29E5F] text-sm font-medium px-4 py-2.5 rounded hover:bg-[#C29E5F]/10 tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
             >
               <Camera className="h-4 w-4 shrink-0" aria-hidden="true" />
               Try it on with Virtual Fitting
@@ -344,7 +344,7 @@ export default async function ProductDetailPage({
 
               <Link
                 href={`/passport/${product.sku}`}
-                className="inline-block text-sm font-medium text-[#7A8B75] underline underline-offset-4 hover:text-[#5a6b55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                className="inline-block text-sm font-medium text-[#7A8B75] underline underline-offset-4 hover:text-[#5a6b55] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
               >
                 View full passport for {product.sku}
               </Link>

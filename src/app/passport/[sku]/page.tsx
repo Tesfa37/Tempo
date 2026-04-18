@@ -201,7 +201,7 @@ export default async function PassportPage({
                   href={passport.gs1DigitalLinkUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#C29E5F] underline underline-offset-2 break-all hover:text-[#a8874f] focus-visible:outline-2 focus-visible:outline-[#C29E5F] rounded"
+                  className="text-[#C29E5F] underline underline-offset-2 break-all hover:text-[#a8874f] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
                 >
                   {passport.gs1DigitalLinkUrl}
                 </a>

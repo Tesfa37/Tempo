@@ -49,7 +49,7 @@ function CreditsList({
         Used under the{" "}
         <a
           href={licenseHref}
-          className="underline underline-offset-2 text-[#C29E5F] hover:text-[#a8874f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+          className="underline underline-offset-2 text-[#C29E5F] hover:text-[#a8874f] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -69,7 +69,7 @@ function CreditsList({
               Photo by{" "}
               <a
                 href={img.photographerUrl}
-                className="text-[#C29E5F] underline underline-offset-2 hover:text-[#a8874f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                className="text-[#C29E5F] underline underline-offset-2 hover:text-[#a8874f] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -93,7 +93,7 @@ export default function CreditsPage() {
             <li>
               <Link
                 href="/"
-                className="hover:text-[#1A1A1A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                className="hover:text-[#1A1A1A] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
               >
                 Home
               </Link>

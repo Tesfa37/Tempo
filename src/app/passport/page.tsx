@@ -58,7 +58,7 @@ export default function PassportIndexPage() {
               </dl>
               <Link
                 href={`/passport/${passport.sku}`}
-                className="text-sm font-medium text-[#7A8B75] hover:text-[#5a6b55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                className="text-sm font-medium text-[#7A8B75] hover:text-[#5a6b55] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
                 aria-label={`View full passport for ${passport.productName}`}
               >
                 View full passport &rarr;

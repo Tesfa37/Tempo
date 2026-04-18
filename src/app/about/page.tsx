@@ -297,7 +297,7 @@ export default function AboutPage() {
             report. First report due Q1 2027 at{" "}
             <Link
               href="/governance"
-              className="underline underline-offset-2 hover:text-neutral-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+              className="underline underline-offset-2 hover:text-neutral-900 tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
             >
               tempo.style/governance
             </Link>

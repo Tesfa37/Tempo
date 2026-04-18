@@ -167,7 +167,7 @@ export default function BriefPage() {
                 </p>
                 <Link
                   href={cat.href}
-                  className="text-sm font-medium text-[#7A8B75] underline underline-offset-4 hover:text-[#5a6b55] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
+                  className="text-sm font-medium text-[#7A8B75] underline underline-offset-4 hover:text-[#5a6b55] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] rounded"
                 >
                   Browse {cat.label} <span aria-hidden="true">→</span>
                 </Link>
@@ -225,19 +225,19 @@ export default function BriefPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/shop"
-              className="bg-[#C29E5F] text-[#1A1A1A] text-sm font-semibold px-6 py-3 rounded hover:bg-[#d4b06e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1A]"
+              className="bg-[#C29E5F] text-[#1A1A1A] text-sm font-semibold px-6 py-3 rounded hover:bg-[#d4b06e] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1A]"
             >
               Browse the catalog
             </Link>
             <Link
               href="/fit"
-              className="border border-[#C29E5F] text-[#C29E5F] text-sm font-semibold px-6 py-3 rounded hover:bg-[#C29E5F]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
+              className="border border-[#C29E5F] text-[#C29E5F] text-sm font-semibold px-6 py-3 rounded hover:bg-[#C29E5F]/10 tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
             >
               Try Virtual Fitting
             </Link>
             <Link
               href="/about"
-              className="border border-[#FAFAF7]/20 text-[#FAFAF7] text-sm font-semibold px-6 py-3 rounded hover:bg-[#FAFAF7]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FAFAF7]/50"
+              className="border border-[#FAFAF7]/20 text-[#FAFAF7] text-sm font-semibold px-6 py-3 rounded hover:bg-[#FAFAF7]/10 tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FAFAF7]/50"
             >
               Meet the team
             </Link>
