@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -73,9 +74,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="bg-[#E8DFD2] text-[#1A1A1A] antialiased">
+      <body className="bg-[var(--bg-canvas)] text-[var(--ink-primary)] antialiased">
         <StructuredData data={buildOrganization()} />
-        <Header isAuthed={!!user} />
+        <Suspense fallback={<div className="h-16 border-b border-[var(--border)]" />}>
+          <Header isAuthed={!!user} />
+        </Suspense>
         <main>{children}</main>
         <Footer />
         <PwaInit />
