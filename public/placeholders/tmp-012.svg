@@ -3,5 +3,5 @@
   <path d="M120 80 L280 80 L295 250 L258 435 L222 435 L200 258 L178 435 L142 435 L105 250Z" fill="none" stroke="#333" stroke-width="2" stroke-linejoin="round"/>
   <line x1="120" y1="80" x2="280" y2="80" stroke="#333" stroke-width="3"/>
   <line x1="118" y1="95" x2="282" y2="95" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="200" y="468" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#666">TMP-012 - Adaptive Pull-On Jean</text>
+  <text x="200" y="480" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#666">TMP-012 - Adaptive Pull-On Jean</text>
 </svg>

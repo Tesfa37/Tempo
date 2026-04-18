@@ -2,5 +2,5 @@
   <rect width="400" height="500" fill="#F5F0E8"/>
   <path d="M130 80 L270 80 L280 240 L240 420 L210 420 L200 260 L190 420 L160 420 L120 240Z" fill="none" stroke="#333" stroke-width="2" stroke-linejoin="round"/>
   <line x1="130" y1="80" x2="270" y2="80" stroke="#333" stroke-width="2"/>
-  <text x="200" y="460" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#666">TMP-008 - Women's Tailored Trouser</text>
+  <text x="200" y="480" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#666">TMP-008 - Women's Tailored Trouser</text>
 </svg>
