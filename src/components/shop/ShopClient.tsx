@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SlidersHorizontal, X } from "lucide-react";
 import { FilterSidebar, type FilterState } from "@/components/shop/FilterSidebar";
@@ -89,11 +89,25 @@ const GENDER_CHIPS: { label: string; value: GenderFilter | undefined }[] = [
   { label: "Adaptive", value: "adaptive" },
 ];
 
+const VALID_GENDERS = ["women", "men", "adaptive"] as const;
+function parseGender(raw: string | null): GenderFilter | undefined {
+  return VALID_GENDERS.includes(raw as GenderFilter) ? (raw as GenderFilter) : undefined;
+}
+
 export function ShopClient({ products, initialGender }: ShopClientProps) {
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
   const [gender, setGender] = useState<GenderFilter | undefined>(initialGender);
   const [caregiverMode, setCaregiverMode] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    function onPop() {
+      const params = new URLSearchParams(window.location.search);
+      setGender(parseGender(params.get("gender")));
+    }
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   function handleGenderChip(value: GenderFilter | undefined) {
     setGender(value);
@@ -154,7 +168,7 @@ export function ShopClient({ products, initialGender }: ShopClientProps) {
       <div
         className="flex gap-2 mb-6 flex-wrap"
         role="group"
-        aria-label="Filter by category"
+        aria-label="Filter by gender"
       >
         {GENDER_CHIPS.map((chip) => {
           const active = chip.value === gender;
@@ -191,9 +205,9 @@ export function ShopClient({ products, initialGender }: ShopClientProps) {
               >
                 <SlidersHorizontal size={16} aria-hidden="true" />
                 Filter
-                {activeCount > 0 && (
+                {(activeCount > 0 || gender) && (
                   <span className="ml-1 bg-[var(--accent)] text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-                    {activeCount}
+                    {activeCount + (gender ? 1 : 0)}
                   </span>
                 )}
               </SheetTrigger>
@@ -205,7 +219,7 @@ export function ShopClient({ products, initialGender }: ShopClientProps) {
                 </SheetHeader>
                 <div className="px-4 pb-4 overflow-y-auto">
                   <FilterSidebar filters={filters} onChange={setFilters} />
-                  {activeCount > 0 && (
+                  {(activeCount > 0 || gender) && (
                     <button
                       onClick={resetAll}
                       className="mt-6 flex items-center gap-1.5 text-sm text-[#C4725A] hover:text-[#a85a44] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded"
