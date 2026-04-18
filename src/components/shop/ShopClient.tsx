@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { SlidersHorizontal, X } from "lucide-react";
 import { FilterSidebar, type FilterState } from "@/components/shop/FilterSidebar";
 import { ProductCard } from "@/components/shop/ProductCard";
@@ -187,6 +188,16 @@ export function ShopClient({ products, initialGender }: ShopClientProps) {
             </button>
           );
         })}
+      </div>
+
+      {/* Match-Set Builder nav hint */}
+      <div className="flex justify-end mb-4">
+        <Link
+          href="/style/build"
+          className="text-sm text-[var(--ink-secondary)] hover:text-[var(--accent)] underline underline-offset-2 tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded"
+        >
+          Build a match set →
+        </Link>
       </div>
 
       <div className="flex gap-8">
