@@ -36,9 +36,7 @@ function buildVirtualFittingSchema() {
   };
 }
 
-const tryOnProducts = products.filter(
-  (p) => p.productType === "top" || p.productType === "bottom" || p.category === "tops" || p.category === "bottoms" || p.category === "dresses" || p.category === "outerwear"
-);
+const tryOnProducts = products;
 
 export default function FitLandingPage() {
   return (
