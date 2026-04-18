@@ -9,7 +9,7 @@
 
 ## 0. Context
 
-Phase 3 shipped 12 products (TMP-001 to TMP-012), a gender-tagged data model, PWA, SEO, and outfit-pairing helpers. P2 repositions Tempo's navigation and homepage from a single undifferentiated catalog into a Women / Men / Adaptive three-category architecture — the thesis for the CICDC pitch. Design system tokens are updated to reflect a more editorial, warmth-forward palette.
+Phase 3 shipped 12 products (TMP-001 to TMP-012), a gender-tagged data model, PWA, SEO, and outfit-pairing helpers. P2 repositions Tempo's navigation and homepage from a single undifferentiated catalog into a Women / Men / Adaptive three-category architecture, the thesis for the CICDC pitch. Design system tokens are updated to reflect a more editorial, warmth-forward palette.
 
 **Stack:** Next.js 15 App Router, TypeScript strict, Tailwind v4 (CSS-first, no tailwind.config.ts), shadcn/ui, Vercel.
 
@@ -63,7 +63,7 @@ Existing `--color-amber` (#C29E5F), `--color-sage` (#7A8B75), `--color-sand` (#E
 }
 ```
 
-Global transition default on interactive elements: `transition-all duration-[400ms] ease-out`. Applied per-component, not globally via *, to avoid performance regression.
+Global transition default for interactive elements: `transition-all duration-[400ms] ease-out`, applied via a utility class `.tempo-transition` in `globals.css`. Add `.tempo-transition` to buttons, links, chips, nav items, and card hover targets. Do not apply to decorative or layout-only elements.
 
 ### 1.6 Scope
 
@@ -84,13 +84,14 @@ No changes to: dark mode vars, shadcn component tokens (--primary, --secondary, 
 | Adaptive | `/shop?gender=adaptive` | Identical visual treatment |
 | Virtual Fitting | `/try-on` | P4 renames route to `/fit` |
 | Passports | Existing route | Unchanged |
-| Voice | Existing route | Phase 3 voice is a layout-level overlay with no dedicated route; implementer to confirm target href before shipping (likely `/#voice` or a trigger button rather than a nav link) |
+
+**Voice Commerce:** Removed from primary nav. Voice is a layout-level overlay with no routed destination. A floating trigger button (bottom-right, `position: fixed`) is added to `layout.tsx` to keep Voice discoverable site-wide without occupying a primary nav slot. Primary nav is five destination links only: Women, Men, Adaptive, Virtual Fitting, Passports.
 
 **Critical:** Women, Men, and Adaptive use identical `className`. No conditional styling, no visual weight difference, no badge, no subtitle. The equal treatment is the positioning thesis.
 
 ### 2.2 Utility rail (right side)
 
-Caregiver Mode toggle, Cart icon, Account state — preserved exactly as shipped in Phase 3.
+Caregiver Mode toggle, Cart icon, Account state, preserved exactly as shipped in Phase 3.
 
 ### 2.3 Mobile
 
@@ -104,7 +105,7 @@ Active link (matching current pathname + search params) gets `font-medium` and `
 
 ## 3. Homepage Rebuild
 
-**File:** `src/app/page.tsx` — full replacement of section content. Component imports for `ValidatedByStrip` and `NewsletterSection` are preserved.
+**File:** `src/app/page.tsx`: full replacement of section content. Component imports for `ValidatedByStrip` and `NewsletterSection` are preserved.
 
 ### 3.1 Section order
 
@@ -231,15 +232,22 @@ Existing "No products match" + reset filters button is preserved. Reset button c
 No external image fetches at build time.
 
 **New SVG placeholders needed:**
-- `hero-editorial.svg` — for homepage hero
-- `category-women.svg` — for Women tile
-- `category-men.svg` — for Men tile  
-- `category-adaptive.svg` — for Adaptive tile
-- `feature-matchset.svg` — for Match Set Builder
-- `feature-virtualfit.svg` — for Virtual Fitting
+- `hero-editorial.svg`: homepage hero
+- `category-women.svg`: Women tile
+- `category-men.svg`: Men tile
+- `category-adaptive.svg`: Adaptive tile
+- `feature-matchset.svg`: Match Set Builder
+- `feature-virtualfit.svg`: Virtual Fitting
+
+**Category tile fills (tonally distinct to make the three-category architecture read visually, even as placeholders):**
+- Women tile (`category-women.svg`): `#E8DFD2` (sand wash)
+- Men tile (`category-men.svg`): `#D4D4D0` (stone wash)
+- Adaptive tile (`category-adaptive.svg`): `#C9B896` (muted tan wash)
+
+**Hero and feature placeholder fills:** `#E8E4DC` (warm neutral, same for all non-category placeholders)
 
 Each SVG:
-- Warm neutral fill (`#E8E4DC`), silhouette or abstract editorial shape
+- Fill as specified above, silhouette or abstract editorial shape
 - `aria-hidden="true"` on decorative SVG elements; descriptive alt on the `<img>` tag
 - Code comment: `{/* TODO: replace with licensed editorial photo */}`
 - Stored in `/public/placeholders/`
@@ -270,15 +278,16 @@ Alt text examples (scene-first, no condition-leading):
 - [ ] `pnpm lint` green
 - [ ] `pnpm typecheck` green
 - [ ] `pnpm build` green
-- [ ] Load `/` — Playfair loads on headings, Inter on body, bg is `#FAFAF7`
-- [ ] Tab through entire homepage — every interactive element shows focus ring
-- [ ] Load `/shop?gender=adaptive` — only adaptive products render
-- [ ] Load `/shop?gender=women` — gender chip shows Women active
-- [ ] Mobile 375px — category tiles stack vertically
-- [ ] DevTools prefers-reduced-motion toggle — animations disabled
-- [ ] Navigate to `/try-on` — still works
-- [ ] Navigate to `/passports` — still works with Phase 3 styling
-- [ ] Navigate to `/accessibility` — still works
+- [ ] Load `/`: Playfair loads on headings, Inter on body, bg is `#FAFAF7`
+- [ ] Tab through entire homepage: every interactive element shows focus ring
+- [ ] Load `/shop?gender=adaptive`: only adaptive products render
+- [ ] Load `/shop?gender=women`: gender chip shows Women active
+- [ ] Mobile 375px: category tiles stack vertically
+- [ ] DevTools prefers-reduced-motion toggle: animations disabled
+- [ ] Navigate to `/try-on`: still works
+- [ ] Navigate to `/passports`: still works with Phase 3 styling
+- [ ] Navigate to `/accessibility`: still works
+- [ ] Voice floating trigger visible bottom-right, activates overlay, not a nav link
 
 ---
 
