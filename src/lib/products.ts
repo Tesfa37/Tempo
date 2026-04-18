@@ -65,6 +65,6 @@ export function getCompatibleTops(bottomSku: string): Product[] {
   if (!bottom) return [];
   const tops = products.filter((p) => p.productType === 'top');
   return tops.sort(
-    (a, b) => pairingScore(a, bottom) - pairingScore(b, bottom),
+    (a, b) => pairingScore(b, bottom) - pairingScore(a, bottom),
   );
 }

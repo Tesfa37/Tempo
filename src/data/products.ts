@@ -58,7 +58,7 @@ export const products: Product[] = [
     description:
       "Engineered for seated wear with magnetic side-closure and seat-relief tailoring. One-handed dressing in under 3 minutes.",
     longDescription:
-      "The Seated-Cut Trouser redefines what trousers can do for someone who spends most of their day seated. Our seat-relief tailoring adds 3cm of extra fabric at the back rise, eliminating the uncomfortable pull that standard trousers create in a wheelchair. The magnetic side-closure at both hips replaces buttons and zippers entirely — allowing single-handed dressing without the fifteen-minute struggle. Fabricated in GOTS-certified organic cotton twill with 5% elastane for shape retention, the trouser holds a clean silhouette from 8am to 8pm. Sensory-friendly flat seams throughout; no raised inseam to cause pressure points.",
+      "The Seated-Cut Trouser redefines what trousers can do for someone who spends most of their day seated. Our seat-relief tailoring adds 3cm of extra fabric at the back rise, eliminating the uncomfortable pull that standard trousers create in a wheelchair. The magnetic side-closure at both hips replaces buttons and zippers entirely, allowing single-handed dressing without the fifteen-minute struggle. Fabricated in GOTS-certified organic cotton twill with 5% elastane for shape retention, the trouser holds a clean silhouette from 8am to 8pm. Sensory-friendly flat seams throughout; no raised inseam to cause pressure points.",
     adaptiveFeatures: [
       {
         name: "Magnetic Side-Closure",
@@ -123,7 +123,7 @@ export const products: Product[] = [
     description:
       "A wrap silhouette secured by hidden magnets. No knot, no tie, no fine motor skill required. Sensory-friendly fabric.",
     longDescription:
-      "The Knotless Wrap Blouse takes the timeless wrap silhouette and re-engineers its entire closure system. Where traditional wraps require two hands and fine motor precision to knot, ours uses a discreet magnetic overlap at the waist and a single hidden snap at the shoulder. The result is a blouse that looks professionally dressed and takes under two minutes to put on independently. Fabricated in GOTS-certified organic jersey with a brushed inner surface for sensory comfort — no scratchy labels, no irritating seam allowances. The weight and drape mirror conventional office-appropriate blouses, so the adaptive origin is entirely private if the wearer chooses.",
+      "The Knotless Wrap Blouse takes the timeless wrap silhouette and re-engineers its entire closure system. Where traditional wraps require two hands and fine motor precision to knot, ours uses a discreet magnetic overlap at the waist and a single hidden snap at the shoulder. The result is a blouse that looks professionally dressed and takes under two minutes to put on independently. Fabricated in GOTS-certified organic jersey with a brushed inner surface for sensory comfort, no scratchy labels, no irritating seam allowances. The weight and drape mirror conventional office-appropriate blouses, so the adaptive origin is entirely private if the wearer chooses.",
     adaptiveFeatures: [
       {
         name: "Magnetic Wrap Closure",
@@ -182,7 +182,7 @@ export const products: Product[] = [
     description:
       "A structured cardigan with magnetic button-replacement closures. Full range of motion for arthritic hands. Sterilization-safe.",
     longDescription:
-      "Fine motor challenges make traditional buttons a daily frustration for people with arthritis, post-stroke tremor, or limited hand strength. The Magnetic-Front Cardigan replaces every button with a paired neodymium magnet concealed behind a fabric-covered button aesthetic — the garment looks like a standard 7-button cardigan and fastens with a single sweeping motion. The structured mid-weight fabrication in recycled wool-cotton blend holds shape through repeated magnetic cycles. The front placket is cut with 2cm extra ease to accommodate edema or bandages. All trim is reclaimed from post-consumer textile waste.",
+      "Fine motor challenges make traditional buttons a daily frustration for people with arthritis, post-stroke tremor, or limited hand strength. The Magnetic-Front Cardigan replaces every button with a paired neodymium magnet concealed behind a fabric-covered button aesthetic, the garment looks like a standard 7-button cardigan and fastens with a single sweeping motion. The structured mid-weight fabrication in recycled wool-cotton blend holds shape through repeated magnetic cycles. The front placket is cut with 2cm extra ease to accommodate edema or bandages. All trim is reclaimed from post-consumer textile waste.",
     adaptiveFeatures: [
       {
         name: "Magnetic Button System",
@@ -238,7 +238,7 @@ export const products: Product[] = [
     description:
       "Full-length side zips from hip to ankle for assisted dressing. Sensory-safe seams, elastic waist, wheelchair silhouette.",
     longDescription:
-      "The Side-Zip Adaptive Jogger was designed in direct consultation with wheelchair users and the caregivers who assist with morning dressing. Full-length YKK zippers run from hip to ankle on both legs, allowing the trouser to be fully opened flat for assisted dressing — eliminating the need to lift or reposition the wearer. Once on, the zippers close flush and invisibly into the side seam. The elastic waist with internal grip tape prevents riding during transfers. Fabricated in GOTS organic cotton French terry — warm, breathable, and compliant with care facility laundry protocols.",
+      "The Side-Zip Adaptive Jogger was designed in direct consultation with wheelchair users and the caregivers who assist with morning dressing. Full-length YKK zippers run from hip to ankle on both legs, allowing the trouser to be fully opened flat for assisted dressing, eliminating the need to lift or reposition the wearer. Once on, the zippers close flush and invisibly into the side seam. The elastic waist with internal grip tape prevents riding during transfers. Fabricated in GOTS organic cotton French terry, warm, breathable, and compliant with care facility laundry protocols.",
     adaptiveFeatures: [
       {
         name: "Full-Length Side Zips",
@@ -297,7 +297,7 @@ export const products: Product[] = [
     description:
       "A pull-on midi dress with no closures, no zippers, no frustration. Dementia-friendly design. Looks elegant, dresses in 90 seconds.",
     longDescription:
-      "The Easy-Pull Dress was specifically designed in consultation with dementia care advisors who identified closure frustration as a leading source of distress during morning dressing. There are no closures on this dress — none. A thoughtfully engineered stretch neckline, side-step construction, and full-length cut mean the dress can be pulled on over the head and smoothed into place in under 90 seconds. The mid-length A-line cut works equally well seated or standing. Fabricated in GOTS organic cotton modal blend with four-way stretch — it moves with the body without constricting. Sensory-safe flat seams; no decorative hardware. The dress presents as a standard midi with no visible sign of adaptive engineering.",
+      "The Easy-Pull Dress was specifically designed in consultation with dementia care advisors who identified closure frustration as a leading source of distress during morning dressing. There are no closures on this dress, none. A thoughtfully engineered stretch neckline, side-step construction, and full-length cut mean the dress can be pulled on over the head and smoothed into place in under 90 seconds. The mid-length A-line cut works equally well seated or standing. Fabricated in GOTS organic cotton modal blend with four-way stretch, it moves with the body without constricting. Sensory-safe flat seams; no decorative hardware. The dress presents as a standard midi with no visible sign of adaptive engineering.",
     adaptiveFeatures: [
       {
         name: "Zero-Closure Construction",
@@ -347,7 +347,6 @@ export const products: Product[] = [
     isFeatured: false,
     isNew: true,
     gender: 'women',
-    productType: 'top',
     colorFamily: 'warm',
     formality: 'smart-casual',
   },
@@ -362,7 +361,7 @@ export const products: Product[] = [
     description:
       "The visual language of a classic linen shirt, re-engineered with hidden snap magnets. Post-stroke and arthritis tested.",
     longDescription:
-      "We kept everything that makes a linen shirt desirable — the open weave, the natural texture, the collar, the cuffs — and replaced the only part that makes it inaccessible: the buttons. The Button-Free Linen Shirt uses seven concealed magnetic snap pairs along the placket, each covered by a fabric-covered decorative button that serves as aesthetic only. The magnets engage with a firm press or a single sweeping motion down the chest. Collar stays are magnetic as well, preventing collar tips from lifting. Fabricated in GOTS certified Belgian linen washed to a soft hand. The cuff buttons are functional magnetic snaps, closable with one hand. Post-stroke and arthritis communities were the primary design consultants for this garment.",
+      "We kept everything that makes a linen shirt desirable, the open weave, the natural texture, the collar, the cuffs, and replaced the only part that makes it inaccessible: the buttons. The Button-Free Linen Shirt uses seven concealed magnetic snap pairs along the placket, each covered by a fabric-covered decorative button that serves as aesthetic only. The magnets engage with a firm press or a single sweeping motion down the chest. Collar stays are magnetic as well, preventing collar tips from lifting. Fabricated in GOTS certified Belgian linen washed to a soft hand. The cuff buttons are functional magnetic snaps, closable with one hand. Post-stroke and arthritis communities were the primary design consultants for this garment.",
     adaptiveFeatures: [
       {
         name: "Hidden Magnetic Placket",
