@@ -26,7 +26,7 @@ const ACTIONS = [
     why: "Getting fit right the first time reduces returns and the associated transport emissions.",
   },
   {
-    event: "AR try-on session",
+    event: "AI virtual fitting session",
     points: 75,
     why: "Trying before buying, without physical shipping, is the lowest-emission path to a purchase decision.",
   },

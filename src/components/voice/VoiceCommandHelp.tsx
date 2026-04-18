@@ -16,7 +16,7 @@ const COMMANDS = [
   { say: "Go to passport", does: "Opens Digital Product Passport gallery" },
   { say: "Go to about", does: "Opens the About Tempo page" },
   { say: "Go to financial support", does: "Opens the Financial Support page" },
-  { say: "Try on [product name]", does: "Opens AR try-on for that product" },
+  { say: "Try on [product name]", does: "Opens AI Virtual Fitting for that product" },
   { say: "I need help with fit", does: "Opens AI Fit Concierge with your question" },
 ];
 

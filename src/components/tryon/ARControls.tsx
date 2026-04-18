@@ -28,7 +28,7 @@ export function ARControls({
   return (
     <div
       role="region"
-      aria-label="AR try-on controls"
+      aria-label="AI Virtual Fitting controls"
       className="bg-[#1A1A1A]/95 rounded-xl p-4 flex flex-col gap-4"
     >
       {/* Wheelchair mode toggle */}
@@ -127,7 +127,7 @@ export function ARControls({
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close AR try-on (Escape)"
+          aria-label="Close Virtual Fitting (Escape)"
           className="flex items-center justify-center gap-1.5 bg-[#C4725A]/80 text-[#FAFAF7] text-xs font-medium px-3 py-2.5 rounded hover:bg-[#C4725A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F]"
         >
           <X className="h-4 w-4 shrink-0" aria-hidden="true" />

@@ -28,7 +28,7 @@ const EVENT_LABELS: Record<string, string> = {
   write_caregiver_review: "Submitted a caregiver review",
   refer_caregiver: "Referred a caregiver",
   complete_fit_concierge: "Used the Fit Concierge",
-  ar_tryon_session: "AR try-on session",
+  ar_tryon_session: "AI virtual fitting session",
   take_back_return: "Take-Back return",
   advocacy_share: "Shared an advocacy link",
   quarterly_advocacy_action: "Quarterly advocacy action",

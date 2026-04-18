@@ -282,7 +282,7 @@ export default async function ProductDetailPage({
             {/* Size selector + Add to cart */}
             <ProductAddToCart product={product} />
 
-            {/* AR Try-On CTA */}
+            {/* Virtual Fitting CTA */}
             <Link
               href={`/fit/${product.slug}`}
               aria-label={`Try ${product.name} with AI Virtual Fitting`}

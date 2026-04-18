@@ -66,7 +66,7 @@ export function TryOnClient({ product }: TryOnClientProps) {
       setStage("active");
       awardPoints("ar_tryon_session", 75).then((result) => {
         if (result.success && !result.skipped) {
-          showEarnToast(75, "AR try-on session");
+          showEarnToast(75, "AI virtual fitting session");
           if (result.tierChanged && result.tier) showTierUpToast(result.tier);
         }
       }).catch(() => null);
@@ -101,7 +101,7 @@ export function TryOnClient({ product }: TryOnClientProps) {
     ) {
       await navigator.share({
         files: [file],
-        title: `Tempo ${product.name} Try-On`,
+        title: `Tempo ${product.name} Virtual Fitting`,
       });
     } else {
       try {
@@ -148,10 +148,10 @@ export function TryOnClient({ product }: TryOnClientProps) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-16 text-center">
         <p className="text-lg font-semibold text-[#1A1A1A] mb-2">
-          AR Try-On is not supported in this browser.
+          AI Virtual Fitting is not supported in this browser.
         </p>
         <p className="text-[#5A5A5A] text-sm mb-6">
-          Your browser does not support AR Try-On. Try the latest Chrome,
+          Your browser does not support AI Virtual Fitting. Try the latest Chrome,
           Safari, or Firefox.
         </p>
         <Link
@@ -231,7 +231,7 @@ export function TryOnClient({ product }: TryOnClientProps) {
               {product.name}
             </h1>
             <span className="text-xs bg-[#C29E5F]/20 text-[#C29E5F] border border-[#C29E5F]/40 px-2 py-0.5 rounded-full font-medium">
-              AR Pilot, Beta
+              AI Pilot, Beta
             </span>
           </div>
         </div>
