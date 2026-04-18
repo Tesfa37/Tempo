@@ -43,9 +43,9 @@ export function Header({ isAuthed = false }: HeaderProps) {
   }
 
   const linkClass = (link: NavLink) =>
-    `inline-flex items-center gap-1.5 text-sm font-medium tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded px-1 ${
+    `inline-flex items-center gap-1.5 text-sm tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded px-1 ${
       isActive(link)
-        ? "text-[var(--accent)] font-semibold"
+        ? "text-[var(--accent)] font-medium"
         : "text-[var(--ink-primary)] hover:text-[var(--accent)]"
     }`;
 

@@ -23,18 +23,23 @@ export function ProductCard({
       }`}
     >
       {/* Placeholder image gradient */}
-      <div
-        className={`h-44 bg-gradient-to-br ${gradientClass} relative flex items-center justify-center`}
-        aria-hidden="true"
-      >
+      <div className="relative">
+        <div
+          className={`h-44 bg-gradient-to-br ${gradientClass} relative flex items-center justify-center`}
+          aria-hidden="true"
+        >
+          {product.isFeatured && (
+            <span className="absolute top-3 right-3 bg-[#C29E5F] text-white text-xs font-medium px-2.5 py-0.5 rounded-full">
+              Featured
+            </span>
+          )}
+        </div>
         {product.isNew && (
-          <span className="absolute top-3 left-3 bg-[#7A8B75] text-white text-xs font-medium px-2.5 py-0.5 rounded-full">
+          <span
+            aria-hidden="true"
+            className="absolute top-3 left-3 bg-[#7A8B75] text-white text-xs font-medium px-2.5 py-0.5 rounded-full"
+          >
             New
-          </span>
-        )}
-        {product.isFeatured && (
-          <span className="absolute top-3 right-3 bg-[#C29E5F] text-white text-xs font-medium px-2.5 py-0.5 rounded-full">
-            Featured
           </span>
         )}
       </div>

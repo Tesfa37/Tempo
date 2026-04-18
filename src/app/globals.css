@@ -101,6 +101,8 @@
   --accent-foreground: #FFFFFF;
   --border: #E8E4DC;
 
+  --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-family-serif: var(--font-playfair), ui-serif, Georgia, serif;
   --font-headline: var(--font-playfair);
   --font-body: var(--font-inter);
   --background: oklch(1 0 0);

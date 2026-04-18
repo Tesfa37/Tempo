@@ -133,7 +133,7 @@ export function ShopClient({ products, initialGender }: ShopClientProps) {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
         <div>
           <h1 className="font-playfair text-4xl font-bold text-[var(--ink-primary)]">Shop</h1>
-          <p className="text-[var(--ink-secondary)] text-sm mt-1">
+          <p className="text-[var(--ink-secondary)] text-sm mt-1" aria-live="polite" aria-atomic="true">
             {filtered.length} {filtered.length === 1 ? "product" : "products"}
           </p>
         </div>
@@ -202,6 +202,7 @@ export function ShopClient({ products, initialGender }: ShopClientProps) {
             <Sheet>
               <SheetTrigger
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-sm font-medium text-[var(--ink-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] hover:bg-[#E8DFD2] tempo-transition"
+                aria-label={`Filter${(activeCount + (gender ? 1 : 0)) > 0 ? `, ${activeCount + (gender ? 1 : 0)} active` : ""}`}
               >
                 <SlidersHorizontal size={16} aria-hidden="true" />
                 Filter
