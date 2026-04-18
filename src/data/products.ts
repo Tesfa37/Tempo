@@ -40,6 +40,10 @@ export interface Product {
   images: string[]; // placeholder paths
   isFeatured: boolean;
   isNew: boolean;
+  gender: 'women' | 'men' | 'adaptive';
+  productType?: 'top' | 'bottom' | 'outer' | 'accessory';
+  colorFamily?: 'neutral' | 'warm' | 'cool' | 'earth';
+  formality?: 'casual' | 'smart-casual' | 'formal';
 }
 
 export const products: Product[] = [
@@ -103,6 +107,10 @@ export const products: Product[] = [
     ],
     isFeatured: true,
     isNew: false,
+    gender: 'adaptive',
+    productType: 'bottom',
+    colorFamily: 'neutral',
+    formality: 'smart-casual',
   },
   {
     id: "tmp-002",
@@ -158,6 +166,10 @@ export const products: Product[] = [
     ],
     isFeatured: false,
     isNew: true,
+    gender: 'women',
+    productType: 'top',
+    colorFamily: 'neutral',
+    formality: 'smart-casual',
   },
   {
     id: "tmp-003",
@@ -210,6 +222,10 @@ export const products: Product[] = [
     ],
     isFeatured: false,
     isNew: false,
+    gender: 'adaptive',
+    productType: 'outer',
+    colorFamily: 'neutral',
+    formality: 'smart-casual',
   },
   {
     id: "tmp-004",
@@ -265,6 +281,10 @@ export const products: Product[] = [
     ],
     isFeatured: false,
     isNew: false,
+    gender: 'adaptive',
+    productType: 'bottom',
+    colorFamily: 'neutral',
+    formality: 'casual',
   },
   {
     id: "tmp-005",
@@ -326,6 +346,10 @@ export const products: Product[] = [
     ],
     isFeatured: false,
     isNew: true,
+    gender: 'women',
+    productType: 'top',
+    colorFamily: 'warm',
+    formality: 'smart-casual',
   },
   {
     id: "tmp-006",
@@ -380,6 +404,10 @@ export const products: Product[] = [
     ],
     isFeatured: false,
     isNew: false,
+    gender: 'adaptive',
+    productType: 'top',
+    colorFamily: 'earth',
+    formality: 'smart-casual',
   },
 ];
 
