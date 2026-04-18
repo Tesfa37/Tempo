@@ -196,7 +196,7 @@ export function ShopClient({ products, initialGender }: ShopClientProps) {
           href="/style/build"
           className="text-sm text-[var(--ink-secondary)] hover:text-[var(--accent)] underline underline-offset-2 tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded"
         >
-          Build a match set →
+          Build a match set <span aria-hidden="true">→</span>
         </Link>
       </div>
 

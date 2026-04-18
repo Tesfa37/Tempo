@@ -34,13 +34,26 @@ function ProductSwiper({
   const label = kind === "top" ? "top" : "bottom";
   const total = items.length;
   const position = currentIndex + 1;
+  const [hasNavigated, setHasNavigated] = useState(false);
+
+  function handlePrev() {
+    setHasNavigated(true);
+    onPrev();
+  }
+
+  function handleNext() {
+    setHasNavigated(true);
+    onNext();
+  }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     if (e.key === "ArrowLeft") {
       e.preventDefault();
+      setHasNavigated(true);
       onPrev();
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
+      setHasNavigated(true);
       onNext();
     }
   }
@@ -69,7 +82,7 @@ function ProductSwiper({
           {imageSrc ? (
             <Image
               src={imageSrc}
-              alt={`${product.name} product image`}
+              alt={product.name}
               fill
               unoptimized={imageSrc.endsWith(".svg")}
               className="object-cover tempo-transition"
@@ -90,7 +103,7 @@ function ProductSwiper({
         {/* Navigation row */}
         <div className="flex items-center justify-between">
           <button
-            onClick={onPrev}
+            onClick={handlePrev}
             aria-label={`Previous ${label}`}
             className="w-9 h-9 flex items-center justify-center rounded-lg border border-[var(--border)] text-[var(--ink-secondary)] hover:border-[var(--accent)] hover:text-[var(--accent)] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           >
@@ -116,7 +129,7 @@ function ProductSwiper({
           </span>
 
           <button
-            onClick={onNext}
+            onClick={handleNext}
             aria-label={`Next ${label}`}
             className="w-9 h-9 flex items-center justify-center rounded-lg border border-[var(--border)] text-[var(--ink-secondary)] hover:border-[var(--accent)] hover:text-[var(--accent)] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           >
@@ -145,7 +158,7 @@ function ProductSwiper({
         aria-atomic="true"
         className="sr-only"
       >
-        {product.name}
+        {hasNavigated ? product.name : ""}
       </span>
     </div>
   );
@@ -175,7 +188,7 @@ function MiniCard({ product }: { product: Product | undefined }) {
         {imageSrc ? (
           <Image
             src={imageSrc}
-            alt={`${product.name} product image`}
+            alt={product.name}
             fill
             unoptimized={imageSrc.endsWith(".svg")}
             className="object-cover"
@@ -290,33 +303,28 @@ export default function MatchSetBuilderPage() {
 
   function handleSave() {
     if (!top || !bottom) return;
-    const existing: Array<{ topSku: string; bottomSku: string; savedAt: string }> =
-      JSON.parse(localStorage.getItem("tempo:saved-sets") ?? "[]");
-    existing.push({
-      topSku: top.sku,
-      bottomSku: bottom.sku,
-      savedAt: new Date().toISOString(),
-    });
-    localStorage.setItem("tempo:saved-sets", JSON.stringify(existing));
+    try {
+      const raw = localStorage.getItem("tempo:saved-sets") ?? "[]";
+      const existing: { topSku: string; bottomSku: string; savedAt: string }[] = JSON.parse(raw);
+      existing.push({ topSku: top.sku, bottomSku: bottom.sku, savedAt: new Date().toISOString() });
+      localStorage.setItem("tempo:saved-sets", JSON.stringify(existing));
+    } catch {
+      localStorage.setItem(
+        "tempo:saved-sets",
+        JSON.stringify([{ topSku: top.sku, bottomSku: bottom.sku, savedAt: new Date().toISOString() }])
+      );
+    }
     toast.success("Set saved");
   }
 
   function handleShop() {
+    const top = tops[topIndex];
+    const bottom = bottoms[bottomIndex];
     if (!top || !bottom) return;
-    addItem({
-      productId: top.sku,
-      slug: top.slug,
-      name: top.name,
-      price: top.price,
-      size: "M",
-    });
-    addItem({
-      productId: bottom.sku,
-      slug: bottom.slug,
-      name: bottom.name,
-      price: bottom.price,
-      size: "M",
-    });
+    const topSize = top.variants.find((v) => v.inStock)?.size ?? top.variants[0]?.size ?? "M";
+    const bottomSize = bottom.variants.find((v) => v.inStock)?.size ?? bottom.variants[0]?.size ?? "M";
+    addItem({ productId: top.sku, slug: top.slug, name: top.name, price: top.price, size: topSize });
+    addItem({ productId: bottom.sku, slug: bottom.slug, name: bottom.name, price: bottom.price, size: bottomSize });
     router.push("/cart");
   }
 
