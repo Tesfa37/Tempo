@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { products } from "@/data/products";
+import { productImages } from "@/data/imagery-manifest";
 import { ValidatedByStrip } from "@/components/home/ValidatedByStrip";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
 
@@ -103,7 +104,7 @@ export default function LandingPage() {
                 sizes="(max-width: 768px) 100vw, 33vw"
                 unoptimized
               />
-              <p className="absolute bottom-8 left-8 font-serif text-5xl font-semibold text-white drop-shadow-sm pointer-events-none">
+              <p className="absolute bottom-8 left-8 font-serif text-5xl font-semibold text-white drop-shadow-sm pointer-events-none" aria-hidden="true">
                 {tile.label}
               </p>
             </Link>
@@ -123,7 +124,7 @@ export default function LandingPage() {
           >
             New Arrivals
           </h2>
-          <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-none">
+          <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-none" role="region" aria-label="New arrivals scroll" tabIndex={0}>
             {newArrivals.map((product) => (
               <Link
                 key={product.id}
@@ -134,7 +135,7 @@ export default function LandingPage() {
                   {product.images[0] ? (
                     <Image
                       src={product.images[0]}
-                      alt={`${product.name} product image`}
+                      alt={productImages[product.images[0]]?.alt ?? `${product.name} in a Tempo garment`}
                       fill
                       className="object-cover tempo-transition group-hover:scale-[1.02]"
                       sizes="(max-width: 768px) 192px, 224px"
@@ -176,8 +177,9 @@ export default function LandingPage() {
               work together across color, formality, and adaptive features.
               Build a look that fits your day, not just your wardrobe.
             </p>
+            {/* TODO: replace with Match Set Builder route when /style/build is built */}
             <Link
-              href="/style/build"
+              href="/shop"
               className="inline-block bg-[var(--accent)] hover:bg-[var(--accent-hover)] tempo-transition text-white font-medium px-6 py-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] text-sm"
             >
               Start styling
