@@ -76,7 +76,7 @@ export default async function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="bg-[var(--bg-canvas)] text-[var(--ink-primary)] antialiased">
         <StructuredData data={buildOrganization()} />
-        <Suspense fallback={<div className="h-16 border-b border-[var(--border)]" />}>
+        <Suspense fallback={<div aria-hidden="true" className="h-16 border-b border-[var(--border)]" />}>
           <Header isAuthed={!!user} />
         </Suspense>
         <main>{children}</main>
