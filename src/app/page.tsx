@@ -62,22 +62,23 @@ export default function LandingPage() {
           sizes="100vw"
         />
         <div
-          className="absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-black/20 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <div className="absolute inset-x-0 bottom-0 pb-24 md:pb-32 flex flex-col items-center text-center px-4">
           <h1
             id="hero-heading"
-            className="font-serif text-5xl md:text-7xl font-semibold text-white drop-shadow-sm mb-4"
+            className="font-serif text-6xl md:text-8xl font-semibold text-white tracking-tight"
+            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}
           >
             Tempo. Fashion at your pace.
           </h1>
-          <p className="font-sans text-lg md:text-xl font-normal text-white/90 mb-8">
+          <p className="font-sans text-xl md:text-2xl font-normal text-white/95 mt-6 tracking-wide">
             Women, Men, Adaptive. One standard.
           </p>
           <Link
             href="/shop"
-            className="inline-block bg-[var(--accent)] hover:bg-[var(--accent-hover)] tempo-transition text-white font-medium px-8 py-4 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white text-base"
+            className="mt-8 inline-block bg-white hover:bg-white/90 tempo-transition text-[var(--ink-primary)] font-medium px-10 py-4 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white text-base hover:scale-[1.02]"
           >
             Shop the collection
           </Link>

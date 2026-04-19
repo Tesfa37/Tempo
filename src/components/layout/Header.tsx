@@ -93,12 +93,6 @@ export function Header({ isAuthed = false }: HeaderProps) {
                 Sign in
               </Link>
             )}
-            <Link
-              href="/shop"
-              className="bg-[var(--accent)] text-white text-sm font-medium px-4 py-2 rounded hover:bg-[var(--accent-hover)] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-            >
-              Shop the collection
-            </Link>
           </nav>
 
           <button
@@ -154,15 +148,6 @@ export function Header({ isAuthed = false }: HeaderProps) {
                   Sign in
                 </Link>
               )}
-            </li>
-            <li>
-              <Link
-                href="/shop"
-                className="block mt-2 bg-[var(--accent)] text-white text-sm font-medium px-4 py-2 rounded text-center hover:bg-[var(--accent-hover)] tempo-transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                onClick={() => setMenuOpen(false)}
-              >
-                Shop the collection
-              </Link>
             </li>
           </ul>
         </nav>
