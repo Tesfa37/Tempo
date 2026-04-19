@@ -36,7 +36,7 @@ export default async function Image() {
           overflow: "hidden",
         }}
       >
-        {/* Decorative arc — top-right */}
+        {/* Decorative arc - top-right */}
         <div
           style={{
             position: "absolute",

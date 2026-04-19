@@ -39,7 +39,7 @@ export interface FitProfile {
   bottom: string;
   shoe?: string;
   /**
-   * Intentionally string[] — see CareRecipient.conditions for rationale.
+   * Intentionally string[] - see CareRecipient.conditions for rationale.
    * Use KnownCondition type alias for filtering against Product.conditions.
    */
   conditions: string[];
@@ -74,7 +74,7 @@ export interface Profile {
   /**
    * Legacy field kept for backward compatibility.
    * Invariant: caregiver_mode === (account_type !== "individual").
-   * Set account_type — never set caregiver_mode directly.
+   * Set account_type - never set caregiver_mode directly.
    */
   caregiver_mode: boolean;
   public_leaderboard: boolean;

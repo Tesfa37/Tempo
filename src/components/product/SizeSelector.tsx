@@ -56,7 +56,7 @@ export function SizeSelector({ variants, onSizeChange }: SizeSelectorProps) {
             }`}
           >
             {v.size}
-            {!v.inStock && <span className="sr-only"> — out of stock</span>}
+            {!v.inStock && <span className="sr-only">, out of stock</span>}
           </button>
         ))}
       </div>

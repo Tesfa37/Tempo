@@ -113,7 +113,7 @@ export function ARControls({
           type="button"
           onClick={() => onHighContrastChange(!highContrast)}
           aria-pressed={highContrast}
-          aria-label={`High contrast overlay — ${highContrast ? "on" : "off"}`}
+          aria-label={`High contrast overlay, ${highContrast ? "on" : "off"}`}
           className={`flex items-center justify-center gap-1.5 text-xs font-medium px-3 py-2.5 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C29E5F] ${
             highContrast
               ? "bg-[#FAFAF7] text-[#1A1A1A]"

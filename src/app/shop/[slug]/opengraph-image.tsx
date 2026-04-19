@@ -228,7 +228,7 @@ export default async function Image({
                   overflow: "hidden",
                 }}
               >
-                — {feature.description}
+                {feature.description}
               </div>
             </div>
           )}

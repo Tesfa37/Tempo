@@ -219,7 +219,7 @@ export function FitConciergeButton() {
 
           {/* Scrollable conversation area */}
           <div className="flex-1 overflow-y-auto px-6 py-4 min-h-0">
-            {/* Suggestion chips — shown when no conversation yet */}
+            {/* Suggestion chips - shown when no conversation yet */}
             {conversation.length === 0 && (
               <div
                 className="flex flex-wrap gap-2 mb-5"
@@ -348,7 +348,7 @@ export function FitConciergeButton() {
               {loading ? "Finding the right fit for you..." : "Ask Concierge"}
             </button>
 
-            {/* Save + Share — visible after first assistant response */}
+            {/* Save + Share - visible after first assistant response */}
             {hasResponse && (
               <div className="flex gap-2 mt-3">
                 <button

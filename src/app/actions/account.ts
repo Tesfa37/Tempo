@@ -17,7 +17,7 @@ export async function getProfile(): Promise<Profile | null> {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  // Use session-bearing client for SELECT — no elevated privileges needed
+  // Use session-bearing client for SELECT - no elevated privileges needed
   const { data } = await supabase
     .from("profiles")
     .select("id,email,display_name,tier,points,caregiver_mode,public_leaderboard,account_type,care_recipients,fit_profile,agency_settings,email_preferences,deleted_at,created_at")
@@ -69,7 +69,7 @@ export async function updateProfile(updates: {
     return { success: false, error: "Display name must be 100 characters or fewer" };
   }
 
-  // Explicit allowlist — prevents arbitrary column injection via service client
+  // Explicit allowlist - prevents arbitrary column injection via service client
   const patch: Record<string, unknown> = {};
   if (updates.display_name     !== undefined) patch.display_name     = updates.display_name;
   if (updates.account_type     !== undefined) patch.account_type     = updates.account_type;
@@ -77,7 +77,7 @@ export async function updateProfile(updates: {
   if (updates.agency_settings  !== undefined) patch.agency_settings  = updates.agency_settings;
   if (updates.email_preferences !== undefined) patch.email_preferences = updates.email_preferences;
   if (updates.public_leaderboard !== undefined) patch.public_leaderboard = updates.public_leaderboard;
-  // Keep caregiver_mode in sync — see Profile.caregiver_mode invariant note
+  // Keep caregiver_mode in sync - see Profile.caregiver_mode invariant note
   if (updates.account_type !== undefined) {
     patch.caregiver_mode = updates.account_type !== "individual";
   }
@@ -131,7 +131,7 @@ export async function softDeleteAccount(): Promise<{ success: boolean; error?: s
 
   const { error: signOutError } = await supabase.auth.signOut();
   if (signOutError) {
-    // Rollback — un-delete so the user can retry
+    // Rollback - un-delete so the user can retry
     await admin.from("profiles").update({ deleted_at: null }).eq("id", user.id);
     return { success: false, error: signOutError.message };
   }

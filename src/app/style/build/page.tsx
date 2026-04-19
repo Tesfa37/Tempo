@@ -70,7 +70,7 @@ function ProductSwiper({
         </p>
       )}
 
-      {/* Swiper container — keyboard navigable */}
+      {/* Swiper container - keyboard navigable */}
       <div
         tabIndex={0}
         onKeyDown={handleKeyDown}

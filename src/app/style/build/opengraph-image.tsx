@@ -36,7 +36,7 @@ export default async function Image() {
           overflow: "hidden",
         }}
       >
-        {/* Decorative paired rectangles — top/bottom pairing motif */}
+        {/* Decorative paired rectangles - top/bottom pairing motif */}
         <div
           style={{
             position: "absolute",

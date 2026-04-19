@@ -19,7 +19,7 @@ export async function createClient() {
               cookieStore.set(name, value, options)
             );
           } catch {
-            // Server component context — cookies are read-only; ignore
+            // Server component context - cookies are read-only; ignore
           }
         },
       },

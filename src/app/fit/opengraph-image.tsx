@@ -36,7 +36,7 @@ export default async function Image() {
           overflow: "hidden",
         }}
       >
-        {/* Decorative circle — camera lens motif */}
+        {/* Decorative circle - camera lens motif */}
         <div
           style={{
             position: "absolute",
