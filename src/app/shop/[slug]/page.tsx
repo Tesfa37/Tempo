@@ -86,6 +86,17 @@ function AdaptiveIcon({ name }: { name: string }) {
   return <Icon size={18} className="text-[#C29E5F]" aria-hidden="true" />;
 }
 
+// ─── SKUs with matching placeholder reviews ───────────────────────────────────
+
+const SKUS_WITH_REVIEWS = new Set([
+  "TMP-001",
+  "TMP-002",
+  "TMP-003",
+  "TMP-004",
+  "TMP-005",
+  "TMP-006",
+]);
+
 // ─── QR Passport placeholder ─────────────────────────────────────────────────
 
 function QRPlaceholder({ sku }: { sku: string }) {
@@ -219,53 +230,57 @@ export default async function ProductDetailPage({
             </p>
 
             {/* Conditions */}
-            <div>
-              <p className="text-sm font-semibold text-[#1A1A1A] mb-2">
-                Designed for
-              </p>
-              <div
-                className="flex flex-wrap gap-2"
-                role="list"
-                aria-label="Conditions this garment supports"
-              >
-                {product.conditions.map((condition) => (
-                  <span
-                    key={condition}
-                    role="listitem"
-                    className="text-sm bg-[#E8DFD2] text-[#5A5A5A] px-3 py-1 rounded-full border border-[#D4C9BA]"
-                  >
-                    {condition}
-                  </span>
-                ))}
+            {product.conditions.length > 0 && (
+              <div>
+                <p className="text-sm font-semibold text-[#1A1A1A] mb-2">
+                  Designed for
+                </p>
+                <div
+                  className="flex flex-wrap gap-2"
+                  role="list"
+                  aria-label="Conditions this garment supports"
+                >
+                  {product.conditions.map((condition) => (
+                    <span
+                      key={condition}
+                      role="listitem"
+                      className="text-sm bg-[#E8DFD2] text-[#5A5A5A] px-3 py-1 rounded-full border border-[#D4C9BA]"
+                    >
+                      {condition}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Adaptive features */}
-            <div>
-              <p className="text-sm font-semibold text-[#1A1A1A] mb-3">
-                Adaptive features
-              </p>
-              <ul className="space-y-3">
-                {product.adaptiveFeatures.map((feature) => (
-                  <li
-                    key={feature.name}
-                    className="flex items-start gap-3 bg-[#FAFAF7] border border-[#D4C9BA] rounded-lg px-4 py-3"
-                  >
-                    <div className="mt-0.5 shrink-0">
-                      <AdaptiveIcon name={feature.icon} />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-[#1A1A1A]">
-                        {feature.name}
-                      </p>
-                      <p className="text-xs text-[#5A5A5A] mt-0.5">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {product.adaptiveFeatures.length > 0 && (
+              <div>
+                <p className="text-sm font-semibold text-[#1A1A1A] mb-3">
+                  Adaptive features
+                </p>
+                <ul className="space-y-3">
+                  {product.adaptiveFeatures.map((feature) => (
+                    <li
+                      key={feature.name}
+                      className="flex items-start gap-3 bg-[#FAFAF7] border border-[#D4C9BA] rounded-lg px-4 py-3"
+                    >
+                      <div className="mt-0.5 shrink-0">
+                        <AdaptiveIcon name={feature.icon} />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-[#1A1A1A]">
+                          {feature.name}
+                        </p>
+                        <p className="text-xs text-[#5A5A5A] mt-0.5">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Certifications */}
             <div className="flex flex-wrap gap-2">
@@ -358,7 +373,7 @@ export default async function ProductDetailPage({
 
         {/* ── Reviews ──────────────────────────────────────────────────── */}
         <div className="mt-16 pt-12 border-t border-[#D4C9BA]">
-          <ReviewsTabs />
+          <ReviewsTabs showPlaceholderReviews={SKUS_WITH_REVIEWS.has(product.sku)} />
         </div>
 
         {/* ── Structured Data (SEO) ─────────────────────────────────────── */}
