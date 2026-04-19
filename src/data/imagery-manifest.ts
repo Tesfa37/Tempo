@@ -10,7 +10,7 @@ import blurHashes from "./imagery-blur-hashes.json";
 export interface ImageAsset {
   path: string;
   alt: string;
-  source: "Unsplash" | "Pexels" | "Disabled And Here";
+  source: "Unsplash" | "Pexels" | "Disabled And Here" | "Commissioned";
   photographer: string;
   photographerUrl: string;
   license: string;
@@ -205,6 +205,66 @@ export const productImages: Record<string, ImageAsset> = {
     "Pexels",
     "https://www.pexels.com/photo/20817639",
     "Pexels License"
+  ),
+
+  // ── TMP-007 Women's Everyday Tee ─────────────────────────────────────────────
+  '/images/editorial/product-tmp-007.png': asset(
+    '/images/editorial/product-tmp-007.png',
+    'Person in a cream organic cotton crew-neck t-shirt against a warm plaster wall in soft natural window light',
+    'Commissioned',
+    'Tempo Editorial',
+    'https://tempo.style',
+    'All Rights Reserved'
+  ),
+
+  // ── TMP-008 Women's Tailored Trouser ─────────────────────────────────────────
+  '/images/editorial/product-tmp-008.png': asset(
+    '/images/editorial/product-tmp-008.png',
+    'Person walking in taupe cotton twill tailored trousers on a warm wooden floor, paired with a cream blouse',
+    'Commissioned',
+    'Tempo Editorial',
+    'https://tempo.style',
+    'All Rights Reserved'
+  ),
+
+  // ── TMP-009 Men's Crew Neck Tee ──────────────────────────────────────────────
+  '/images/editorial/product-tmp-009.png': asset(
+    '/images/editorial/product-tmp-009.png',
+    'Person in a cream organic cotton crew-neck t-shirt standing in a stone interior with warm natural light',
+    'Commissioned',
+    'Tempo Editorial',
+    'https://tempo.style',
+    'All Rights Reserved'
+  ),
+
+  // ── TMP-010 Men's Straight Trouser ───────────────────────────────────────────
+  '/images/editorial/product-tmp-010.png': asset(
+    '/images/editorial/product-tmp-010.png',
+    'Person in terracotta cotton twill trousers walking past a stone wall on cobblestone, warm morning light',
+    'Commissioned',
+    'Tempo Editorial',
+    'https://tempo.style',
+    'All Rights Reserved'
+  ),
+
+  // ── TMP-011 Adaptive Magnetic Button-Down ────────────────────────────────────
+  '/images/editorial/product-tmp-011.png': asset(
+    '/images/editorial/product-tmp-011.png',
+    'Person in a soft blue cotton poplin button-down shirt in warm natural light, focused composition on the shirt construction',
+    'Commissioned',
+    'Tempo Editorial',
+    'https://tempo.style',
+    'All Rights Reserved'
+  ),
+
+  // ── TMP-012 Adaptive Pull-On Jean ────────────────────────────────────────────
+  '/images/editorial/product-tmp-012.png': asset(
+    '/images/editorial/product-tmp-012.png',
+    'Person seated on a wooden chair wearing recycled cotton denim pull-on jeans paired with a cream knit top',
+    'Commissioned',
+    'Tempo Editorial',
+    'https://tempo.style',
+    'All Rights Reserved'
   ),
 };
 
