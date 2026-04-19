@@ -210,9 +210,10 @@ export default function AccessibilityPage() {
                   className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C4725A] shrink-0"
                   aria-hidden="true"
                 />
-                Product imagery uses decorative placeholder images during our
-                pre-launch period. Real product photography with full alt-text
-                descriptions will be added at launch.
+                Pre-launch editorial photography reflects our styling direction
+                and adaptive construction. Final collection photography will
+                ship with our first production run in Q2 2026. All images
+                include descriptive alt text.
               </li>
             </ul>
           </div>
