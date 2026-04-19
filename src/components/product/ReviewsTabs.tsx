@@ -27,7 +27,7 @@ const WEARER_REVIEWS: WearerReview[] = [
     type: "wearer",
     name: "Diane, S",
     stars: 5,
-    text: "I've been putting on pants by myself for the first time in two years. The magnetic closure is genuinely invisible when dressed. I wore these to my nephew's graduation and not a single person asked about them — which is exactly what I wanted.",
+    text: "I've been putting on pants by myself for the first time in two years. The magnetic closure is genuinely invisible when dressed. I wore these to my nephew's graduation and not a single person asked about them, which is exactly what I wanted.",
   },
   {
     type: "wearer",
@@ -180,7 +180,11 @@ function WriteReviewForm({ type }: { type: "wearer" | "caregiver" }) {
   );
 }
 
-export function ReviewsTabs() {
+interface ReviewsTabsProps {
+  showPlaceholderReviews?: boolean;
+}
+
+export function ReviewsTabs({ showPlaceholderReviews = true }: ReviewsTabsProps) {
   return (
     <section aria-labelledby="reviews-heading">
       <h2
@@ -207,23 +211,35 @@ export function ReviewsTabs() {
         </TabsList>
 
         <TabsContent value="wearer">
-          <div className="space-y-4">
-            {WEARER_REVIEWS.map((review) => (
-              <WearerReviewCard key={review.name} review={review} />
-            ))}
-          </div>
+          {showPlaceholderReviews ? (
+            <div className="space-y-4">
+              {WEARER_REVIEWS.map((review) => (
+                <WearerReviewCard key={review.name} review={review} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-[#5A5A5A] leading-relaxed py-4">
+              Reviews will appear after our first shipments in Q2 2026. Be among the first to review a Tempo garment.
+            </p>
+          )}
           <WriteReviewForm type="wearer" />
         </TabsContent>
 
         <TabsContent value="caregiver">
-          <div className="space-y-4">
-            {CAREGIVER_REVIEWS.map((review) => (
-              <CaregiverReviewCard
-                key={`${review.name}-${review.role}`}
-                review={review}
-              />
-            ))}
-          </div>
+          {showPlaceholderReviews ? (
+            <div className="space-y-4">
+              {CAREGIVER_REVIEWS.map((review) => (
+                <CaregiverReviewCard
+                  key={`${review.name}-${review.role}`}
+                  review={review}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-[#5A5A5A] leading-relaxed py-4">
+              Reviews will appear after our first shipments in Q2 2026. Be among the first to review a Tempo garment.
+            </p>
+          )}
           <WriteReviewForm type="caregiver" />
         </TabsContent>
       </Tabs>
