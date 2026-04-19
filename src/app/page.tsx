@@ -5,6 +5,7 @@ import { products } from "@/data/products";
 import { productImages } from "@/data/imagery-manifest";
 import { ValidatedByStrip } from "@/components/home/ValidatedByStrip";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
+import { editorialImages } from "@/lib/editorial-images";
 
 export const metadata: Metadata = {
   title: "Tempo, Clothes that move at your pace",
@@ -19,22 +20,22 @@ const CATEGORY_TILES = [
   {
     slug: "women",
     label: "Women",
-    img: "/placeholders/category-women.svg",
-    alt: "Person in a tailored Tempo blazer at an outdoor table, morning light",
+    img: editorialImages.categoryWomen,
+    alt: "Person in a tailored cream blazer seated at a sunlit outdoor cafe table, morning light through stone archway",
   },
   {
     slug: "men",
     label: "Men",
-    img: "/placeholders/category-men.svg",
-    alt: "Person in a Tempo button-front shirt boarding a train, bag on shoulder",
+    img: editorialImages.categoryMen,
+    alt: "Person in a Tempo charcoal button-front shirt walking a train station platform with a leather weekender bag, warm evening light",
   },
   {
     slug: "adaptive",
     label: "Adaptive",
-    img: "/placeholders/category-adaptive.svg",
-    alt: "Person in a Tempo seated-cut trouser having coffee at a cafe counter",
+    img: editorialImages.categoryAdaptive,
+    alt: "Person in cream knit top and terracotta trousers seated at a cafe counter in warm window light, in conversation",
   },
-] as const;
+];
 
 function getNewArrivals() {
   const isNew = products.filter((p) => p.isNew);
@@ -52,15 +53,13 @@ export default function LandingPage() {
         className="relative h-[70vh] w-full overflow-hidden"
         aria-labelledby="hero-heading"
       >
-        {/* TODO: replace with licensed editorial photo */}
         <Image
-          src="/placeholders/hero-editorial.svg"
-          alt="Two people walking through a sun-drenched fabric market, one wearing a Tempo linen shirt"
+          src={editorialImages.hero}
+          alt="A couple walking through a sunlit Mediterranean fabric market, fabric awnings overhead, warm golden morning light"
           fill
           className="object-cover"
           priority
           sizes="100vw"
-          unoptimized
         />
         <div
           className="absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-black/20 to-transparent"
@@ -95,14 +94,12 @@ export default function LandingPage() {
               className="relative overflow-hidden aspect-[3/4] md:aspect-auto md:h-[500px] block group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--accent)] focus-visible:ring-inset"
               aria-label={`Shop ${tile.label}`}
             >
-              {/* TODO: replace with licensed editorial photo */}
               <Image
                 src={tile.img}
                 alt={tile.alt}
                 fill
                 className="object-cover tempo-transition group-hover:scale-[1.02]"
                 sizes="(max-width: 768px) 100vw, 33vw"
-                unoptimized
               />
               <p className="absolute bottom-8 left-8 font-serif text-5xl font-semibold text-white drop-shadow-sm pointer-events-none" aria-hidden="true">
                 {tile.label}
@@ -186,14 +183,12 @@ export default function LandingPage() {
             </Link>
           </div>
           <div className="relative order-1 md:order-2 aspect-[4/3] overflow-hidden rounded-2xl">
-            {/* TODO: replace with licensed editorial photo */}
             <Image
-              src="/placeholders/feature-matchset.svg"
-              alt="Flatlay of a matched Tempo outfit on a neutral linen surface"
+              src={editorialImages.featureMatchset}
+              alt="Flatlay of a coordinated Tempo outfit on warm neutral linen, cream shirt folded above dark trousers, leather belt and espresso cup arranged with an olive sprig"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
-              unoptimized
             />
           </div>
         </div>
@@ -206,14 +201,12 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            {/* TODO: replace with licensed editorial photo */}
             <Image
-              src="/placeholders/feature-virtualfit.svg"
-              alt="Person holding a phone showing a Tempo jacket preview in a bright room"
+              src={editorialImages.featureVirtualfit}
+              alt="Person seated in a sunlit apartment using a smartphone at chest height, warm wooden floor, plants in background"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
-              unoptimized
             />
           </div>
           <div>
