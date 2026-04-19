@@ -38,7 +38,7 @@ export default async function CheckoutSuccessPage({
   const skus = meta.skus ? meta.skus.split(",").filter(Boolean) : [];
   const customerEmail = session.customer_email ?? meta.customer_email ?? "";
 
-  // Award TempoPoints — idempotent via session_id
+  // Award TempoPoints - idempotent via session_id
   let pointsResult = { success: false, pointsAwarded: 0, skipped: false };
   if (pointsToAward > 0) {
     const result = await awardPurchasePoints(sessionId, orderTotal);

@@ -395,7 +395,7 @@ export const passports: Record<string, DigitalProductPassport> = {
       "Machine wash at 40°C wool cycle (care facility: up to 60°C wool programme)",
       "Do not bleach",
       "Tumble dry low or dry flat",
-      "Cool iron on reverse — do not iron magnets",
+      "Cool iron on reverse, do not iron magnets",
       "Do not dry clean",
     ],
     sterilizationCompatible: true,
@@ -665,7 +665,7 @@ export const passports: Record<string, DigitalProductPassport> = {
     ],
     recycledContent: 0,
     hazardousSubstances:
-      "None detected. REACH Annex XVII compliant. Natural water retting only — no chemical retting agents used. OEKO-TEX Standard 100 verified (Certificate No. OT-2025-6645-F).",
+      "None detected. REACH Annex XVII compliant. Natural water retting only, no chemical retting agents used. OEKO-TEX Standard 100 verified (Certificate No. OT-2025-6645-F).",
 
     countryOfOrigin: "Italy",
     manufacturingFacility: {
@@ -701,7 +701,7 @@ export const passports: Record<string, DigitalProductPassport> = {
     certifications: [
       {
         name: "Masters of Linen",
-        certificationBody: "CELC — Confédération Européenne du Lin et du Chanvre",
+        certificationBody: "CELC, Confédération Européenne du Lin et du Chanvre",
         certificateNumber: "MOL-2025-7723",
         validUntil: "2026-11-30",
       },
@@ -713,7 +713,7 @@ export const passports: Record<string, DigitalProductPassport> = {
       },
       {
         name: "European Flax Certification",
-        certificationBody: "CELC — Confédération Européenne du Lin et du Chanvre",
+        certificationBody: "CELC, Confédération Européenne du Lin et du Chanvre",
         certificateNumber: "EF-2025-1156",
         validUntil: "2026-11-30",
       },
@@ -732,7 +732,7 @@ export const passports: Record<string, DigitalProductPassport> = {
     careInstructions: [
       "Machine wash at 40°C or hand wash (care facility: up to 60°C cotton programme)",
       "Do not bleach",
-      "Line dry or lay flat — linen softens with each wash",
+      "Line dry or lay flat, linen softens with each wash",
       "Iron while slightly damp for best results",
       "Do not dry clean",
     ],

@@ -64,7 +64,7 @@ export async function POST(req: Request) {
       .join(",")
       .slice(0, 200);
 
-    // Build Stripe line items — one per cart item
+    // Build Stripe line items - one per cart item
     const lineItems = items.map(
       (item: CartItem) => ({
         price_data: {

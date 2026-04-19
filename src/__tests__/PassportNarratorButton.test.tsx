@@ -70,7 +70,7 @@ describe("PassportNarratorButton", () => {
       ).toBeInTheDocument()
     );
 
-    // Click chip — expect a second fetch call with the question field
+    // Click chip - expect a second fetch call with the question field
     fireEvent.click(
       screen.getByText("What does GOTS certification guarantee?")
     );

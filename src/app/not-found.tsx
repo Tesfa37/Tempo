@@ -19,7 +19,7 @@ function NotFoundIllustration() {
       <rect x="20" y="40" width="160" height="4" rx="2" fill="#D4C9BA" />
       <line x1="100" y1="44" x2="100" y2="150" stroke="#D4C9BA" strokeWidth="3" strokeLinecap="round" />
       <circle cx="100" cy="36" r="6" stroke="#C29E5F" strokeWidth="2" fill="none" />
-      {/* Hanging garment outline — empty hanger */}
+      {/* Hanging garment outline - empty hanger */}
       <path
         d="M65 44 Q65 80 50 100 Q40 116 50 124 Q58 130 75 128 Q90 126 90 110 Q90 90 100 80"
         stroke="#C29E5F"

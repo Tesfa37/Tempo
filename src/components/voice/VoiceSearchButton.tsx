@@ -50,7 +50,7 @@ export function VoiceSearchButton({ onOpenHelp }: VoiceSearchButtonProps) {
         setStatusMsg("");
       } else {
         announce("Command not recognised. Say 'help' for a list of commands.");
-        setStatusMsg("Not recognised — try again");
+        setStatusMsg("Not recognised, try again");
         setTimeout(() => setStatusMsg(""), 2500);
         setTranscript("");
       }

@@ -6,7 +6,7 @@ export function PwaInit() {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js").catch(() => {
-        // SW registration failed — offline features unavailable
+        // SW registration failed - offline features unavailable
       });
     }
   }, []);
