@@ -175,9 +175,8 @@ export default function LandingPage() {
               work together across color, formality, and adaptive features.
               Build a look that fits your day, not just your wardrobe.
             </p>
-            {/* TODO: replace with Match Set Builder route when /style/build is built */}
             <Link
-              href="/shop"
+              href="/style/build"
               className="inline-block bg-[var(--accent)] hover:bg-[var(--accent-hover)] tempo-transition text-white font-medium px-6 py-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] text-sm"
             >
               Start styling
